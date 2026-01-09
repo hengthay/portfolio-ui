@@ -5,11 +5,13 @@ import Footer from '../Footer'
 
 const MainLayout = () => {
   return (
-    <>
-      <Header /> 
-      <Outlet />
-      <Footer />
-    </>
+    <div className='w-full h-screen bg-black'>
+      <div className='max-w-7xl container mx-auto flex flex-col text-white bg-zinc-950 shadow-xl'>
+        <Header /> 
+        <Outlet />
+        <Footer />
+      </div>
+    </div>
   )
 }
 

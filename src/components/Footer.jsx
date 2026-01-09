@@ -1,9 +1,67 @@
-import React from 'react'
+import { Link, useLocation } from "react-router-dom";
+import { FaGithubSquare } from "react-icons/fa";
+import { FaTelegramPlane } from "react-icons/fa";
+import { FaFacebookF } from "react-icons/fa";
+import { FaDiscord } from "react-icons/fa6";
+import { MdOutlineEmail } from "react-icons/md";
 
 const Footer = () => {
-  return (
-    <div>Footer</div>
-  )
-}
+  const menu = [
+    { id: 1, name: "Home", path: "/" },
+    { id: 2, name: "About", path: "/about" },
+    { id: 3, name: "Portfolios", path: "/portfolio" },
+    { id: 4, name: "Blogs", path: "/blog" },
+    { id: 5, name: "Contact", path: "/contact" },
+  ];
 
-export default Footer
+  const foot = [
+    { id: 1, Icon: FaGithubSquare, url: "https://github.com/yourusername" },
+    { id: 2, Icon: FaTelegramPlane, url: "https://t.me/yourusername" },
+    { id: 3, Icon: FaFacebookF, url: "https://facebook.com/yourprofile" },
+    { id: 4, Icon: FaDiscord, url: "https://discord.gg/yourinvite" },
+    { id: 5, Icon: MdOutlineEmail, url: "mailto:youremail@gmail.com" },
+  ];
+
+  const location = useLocation();
+
+  return (
+    <footer className="w-full border-t border-slate-800 mt-20">
+      <div className="w-full flex flex-col md:p-6 p-8 overflow-hidden">
+        <ul className="w-full flex flex-wrap md:justify-start md:items-start justify-center items-center md:my-6 my-8">
+          {menu.map((item) => (
+            <li
+              key={item.id}
+              className={`p-1 text-base font-normal hover:text-cyan-600 transition-all ease-in-out duration-300 ${
+                location.pathname === item.path
+                  ? "text-cyan-500"
+                  : "text-white"
+              }`}
+            >
+              <Link to={item.path}>{item.name}</Link>
+            </li>
+          ))}
+        </ul>
+        <div className="w-full text-white md:text-start text-center ">
+          <div className="">
+            <p className="text-sm text-gray-400">&copy; 2026 Heng Thay. All rights reserved.</p>
+          </div>
+          <div className="w-full my-8">
+            <ul className="flex justify-center items-center md:justify-start md:items-start md:gap-x-2 gap-x-2">
+              {
+                foot.map((item) => (
+                <li key={item.id} className="text-white/80">
+                  <a href={item.url} target="_blank" rel="noreferrer">
+                    <item.Icon size={28} className="p-1 rounded-full transition-all hover:bg-gray-500 ease-in-out duration-300"/>
+                  </a>
+                </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
