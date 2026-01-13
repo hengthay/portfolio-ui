@@ -4,7 +4,6 @@ import { FaTelegramPlane } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa";
 import { FaDiscord } from "react-icons/fa6";
 import { MdOutlineEmail } from "react-icons/md";
-import { AiTwotoneExclamationCircle } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchProfiles,
@@ -32,6 +31,11 @@ import {
   selectSkills,
   selectSkillsStatus,
 } from "../features/skills/skillSlice";
+import {
+  fetchCertificate,
+  selectCertificate,
+  selectCertificateStatus,
+} from "../features/certificates/certificateSlice";
 
 const Home = () => {
   const profiles = useSelector(selectProfile);
@@ -45,6 +49,8 @@ const Home = () => {
   const blogStatus = useSelector(selectBlogsStatus);
   const skills = useSelector(selectSkills);
   const skillStatus = useSelector(selectSkillsStatus);
+  const certificates = useSelector(selectCertificate);
+  const certificateStatus = useSelector(selectCertificateStatus);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -58,6 +64,8 @@ const Home = () => {
       if (blogStatus === "idle") dispatch(fetchBlog());
 
       if (skillStatus === "idle") dispatch(fetchSkill());
+
+      if (certificateStatus === "idle") dispatch(fetchCertificate());
     } catch (error) {
       console.log(error);
     }
@@ -273,7 +281,9 @@ const Home = () => {
               <div key={skill.id}>
                 <div className="flex justify-between text-sm text-gray-400 space-y-2">
                   <span className="text-gray-400">{skill.name}</span>
-                  <span className="text-yellow-400 font-semibold">{skill.level}%</span>
+                  <span className="text-yellow-400 font-semibold">
+                    {skill.level}%
+                  </span>
                 </div>
 
                 {/* Ruler line */}
@@ -485,6 +495,82 @@ const Home = () => {
         </div>
       </div>
       {/* Resume end */}
+
+      {/* Certicate Start */}
+      <div className="w-full md:mt-25 mt-20 space-y-14">
+        <div className="space-y-4">
+          <h2 className="md:text-4xl text-2xl lg:text-5xl font-bold tracking-wide">
+            My Certificates
+          </h2>
+          <p className="max-w-xl text-base text-gray-400 tracking-wide leading-relaxed">
+            Certifications I’ve earned through continuous learning and
+            professional development.
+          </p>
+        </div>
+        <div className="relative w-full overflow-hidden">
+          <div className="w-full flex animate-scrollX">
+            {certificates.length > 0 &&
+              certificates.map((certificate) => (
+                <div
+                  className="group w-[260px] shrink-0 rounded-2xl border border-white/10 bg-[#0f172a] overflow-hidden"
+                  key={certificate.id}
+                >
+                  <div className="overflow-hidden">
+                    <img
+                      src={`${import.meta.env.VITE_API_URL}/storage/${
+                        certificate.image
+                      }`}
+                      alt={certificate.title}
+                      className="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                  </div>
+
+                  <div className="p-4 space-y-1">
+                    <h3 className="text-white font-semibold">
+                      {certificate.title}
+                    </h3>
+                    <p className="text-sm text-gray-400">
+                      Issued by {certificate.issuer}
+                    </p>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
+        {certificateStatus === "loading" && (
+          <div className="flex gap-x-2 justify-start items-center mt-20">
+            <p className="text-gray-300 font-medium md:text-base text-sm">
+              Loading
+            </p>
+            <p className="w-8 h-8 rounded-full border-2 border-t-transparent border-gray-400 animate-spin"></p>
+          </div>
+        )}
+        {certificateStatus === "failed" && (
+          <div className="flex gap-x-2 justify-start items-center mt-20 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="shrink-0"
+            >
+              {/* Circle */}
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
+
+              {/* Exclamation line */}
+              <rect x="11" y="6" width="2" height="9" fill="red" />
+
+              {/* Exclamation dot */}
+              <circle cx="12" cy="18" r="1.3" fill="red" />
+            </svg>
+            <p className="text-red-400 font-medium md:text-base text-sm">
+              Failed to get profile data. It might be Internal Server Error!
+            </p>
+          </div>
+        )}
+      </div>
+      {/* Certicate end */}
     </div>
   );
 };
