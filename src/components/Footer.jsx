@@ -26,7 +26,7 @@ const Footer = () => {
 
   return (
     <footer className="w-full border-t border-slate-800 mt-20">
-      <div className="w-full flex flex-col md:p-6 p-8 overflow-hidden">
+      <div className="w-full flex flex-col md:p-16 p-18 overflow-hidden">
         <ul className="w-full flex flex-wrap md:justify-start md:items-start justify-center items-center md:my-6 my-8">
           {menu.map((item) => (
             <li
