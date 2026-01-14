@@ -512,7 +512,7 @@ const Home = () => {
             {certificates.length > 0 &&
               certificates.map((certificate) => (
                 <div
-                  className="group w-[260px] shrink-0 rounded-2xl border border-white/10 bg-[#0f172a] overflow-hidden"
+                  className="group w-65 shrink-0 rounded-2xl border border-white/10 bg-[#0f172a] overflow-hidden"
                   key={certificate.id}
                 >
                   <div className="overflow-hidden">
