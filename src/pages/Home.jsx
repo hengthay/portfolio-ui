@@ -85,16 +85,16 @@ const Home = () => {
   ];
 
   return (
-    <div className="md:p-16 p-6 w-full mx-auto flex flex-col max-w-7xl max-sm:w-100">
+    <div className="md:p-20 p-6 w-full mx-auto flex flex-col max-w-7xl max-sm:w-100">
       {/* Introduce */}
       <div className="w-full">
         {profiles.length > 0 &&
           profiles.map((profile) => (
             <div key={profile.id} className="mt-8 space-y-14">
               <div>
-                <p className="md:text-5xl text-3xl lg:text-6xl font-bold tracking-wide">
+                <h1 className="md:text-5xl text-3xl lg:text-6xl font-bold tracking-wide">
                   Hi, I'm {profile.name}
-                </p>
+                </h1>
               </div>
               <div className="md:space-y-6 space-y-8">
                 <p className="max-w-sm font-semibold md:text-2xl text-xl text-gray-300">
@@ -170,7 +170,7 @@ const Home = () => {
 
         <div className="w-full grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-14 mt-6">
           {portfolios.length > 0 &&
-            portfolios.map((port) => (
+            (portfolios.map((port) => (
               <div
                 key={port.id}
                 className="group rounded-2xl border border-white/10 bg-slate-900/40 shadow-md overflow-hidden
@@ -225,7 +225,7 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-            ))}
+            )))}
         </div>
         {portfolioStatus === "loading" && (
           <div className="flex gap-x-2 justify-start items-center mt-20">

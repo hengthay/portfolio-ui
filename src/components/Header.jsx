@@ -50,7 +50,7 @@ const Header = ({ isOpen, handleOpenMenu}) => {
         </ul>
 
         {/* Mobile mode */}
-        <div className='md:hidden ml-auto flex justify-end'>
+        <div className='md:hidden flex justify-end sm:mx-auto max-sm:mx-16'>
           <button onClick={handleOpenMenu} className='cursor-pointer'>
             <RiArrowDropDownLine size={28} className='text-white'/>
           </button>
