@@ -36,6 +36,12 @@ import {
   selectCertificate,
   selectCertificateStatus,
 } from "../features/certificates/certificateSlice";
+import ProfileCard from "../components/Profile/ProfileCard";
+import PortfolioCard from "../components/Portfolio/PortfolioCard";
+import SkillCard from "../components/Skill/SkillCard";
+import ResumeCard from "../components/Resume/ResumeCard";
+import BlogCard from "../components/Blog/BlogCard";
+import CertificateCard from "../components/Certificate/CertificateCard";
 
 const Home = () => {
   const profiles = useSelector(selectProfile);
@@ -90,21 +96,7 @@ const Home = () => {
       <div className="w-full">
         {profiles.length > 0 &&
           profiles.map((profile) => (
-            <div key={profile.id} className="mt-8 space-y-14">
-              <div>
-                <h1 className="md:text-5xl text-3xl lg:text-6xl font-bold tracking-wide">
-                  Hi, I'm {profile.name}
-                </h1>
-              </div>
-              <div className="md:space-y-6 space-y-8">
-                <p className="max-w-sm font-semibold md:text-2xl text-xl text-gray-300">
-                  {profile.introduce}
-                </p>
-                <p className="max-w-xl text-base text-gray-400">
-                  {profile.bio}
-                </p>
-              </div>
-            </div>
+            <ProfileCard profile={profile} key={profile.id} />
           ))}
 
         {status === "loading" && (
@@ -170,62 +162,9 @@ const Home = () => {
 
         <div className="w-full grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-14 mt-6">
           {portfolios.length > 0 &&
-            (portfolios.map((port) => (
-              <div
-                key={port.id}
-                className="group rounded-2xl border border-white/10 bg-slate-900/40 shadow-md overflow-hidden
-                  transition duration-300 hover:-translate-y-2 hover:shadow-2xl"
-              >
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={`${import.meta.env.VITE_API_URL}/storage/${
-                      port.image_url
-                    }`}
-                    alt={port.title}
-                    className="w-full h-full object-cover transition duration-500 group-hover:scale-110"
-                  />
-                  <div
-                    className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 
-                      transition flex items-center justify-center gap-4"
-                  >
-                    <a
-                      href={`${port.demo_url}`}
-                      target="_blank"
-                      className="px-4 py-2 text-sm rounded-xl bg-cyan-600 text-white hover:bg-cyan-500"
-                    >
-                      Live Demo
-                    </a>
-                    <a
-                      href={`${port.github_url}`}
-                      target="_blank"
-                      className="px-4 py-2 text-sm rounded-xl bg-slate-800 text-white border border-white/20 hover:bg-slate-700"
-                    >
-                      GitHub
-                    </a>
-                  </div>
-                </div>
-
-                <div className="p-5 space-y-4">
-                  <h3 className="text-lg font-semibold text-white">
-                    {port.title}
-                  </h3>
-
-                  <p className="text-sm text-slate-300 leading-relaxed">
-                    {port.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {port.technologies?.map((tech, index) => (
-                      <span
-                        key={index}
-                        className="text-xs px-2 py-1 rounded-full bg-slate-800 text-slate-300 border border-white/10"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )))}
+            portfolios.map((port) => (
+              <PortfolioCard port={port} key={port.id} />
+            ))}
         </div>
         {portfolioStatus === "loading" && (
           <div className="flex gap-x-2 justify-start items-center mt-20">
@@ -277,24 +216,7 @@ const Home = () => {
 
         <div className="w-full space-y-4">
           {skills.length > 0 &&
-            skills.map((skill) => (
-              <div key={skill.id}>
-                <div className="flex justify-between text-sm text-gray-400 space-y-2">
-                  <span className="text-gray-400">{skill.name}</span>
-                  <span className="text-yellow-400 font-semibold">
-                    {skill.level}%
-                  </span>
-                </div>
-
-                {/* Ruler line */}
-                <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-yellow-400 rounded-full"
-                    style={{ width: `${skill.level}%` }}
-                  ></div>
-                </div>
-              </div>
-            ))}
+            skills.map((skill) => <SkillCard skill={skill} key={skill.id} />)}
         </div>
         {skillStatus === "loading" && (
           <div className="flex gap-x-2 justify-start items-center mt-20">
@@ -346,25 +268,7 @@ const Home = () => {
           <ul className="relative space-y-10 before:content-[''] before:absolute before:top-1 before:bottom-0 before:left-1.25 before:w-0.5 before:bg-slate-400">
             {resumes.length > 0 &&
               resumes.map((resume) => (
-                <li
-                  key={resume.id}
-                  className="relative pl-8 space-y-1.5 leading-relaxed tracking-wide"
-                >
-                  <span className="absolute left-0 top-1 w-3 h-3 rounded-full bg-cyan-500"></span>
-
-                  <p className="font-semibold">
-                    {formatDate(resume.start_date)} -{" "}
-                    {resume.end_date ? formatDate(resume.end_date) : "Present"}
-                  </p>
-
-                  <p className="text-gray-400 text-sm">{resume.institution}</p>
-
-                  {resume.field && (
-                    <p className="text-gray-400 text-sm">{resume.field}</p>
-                  )}
-
-                  <p className="text-gray-400 text-sm">{resume.degree}</p>
-                </li>
+                <ResumeCard resume={resume} key={resume.id} />
               ))}
           </ul>
 
@@ -403,7 +307,7 @@ const Home = () => {
         </div>
       </div>
       {/* Resume end */}
-      
+
       {/* Blog start */}
       <div className="w-full md:mt-20 mt-15">
         <div className="md:space-y-12 space-y-8">
@@ -411,58 +315,13 @@ const Home = () => {
             What I am learning as a developer.
           </h2>
           <p className="max-w-xl text-base text-gray-400 tracking-wide leading-relaxed">
-            This space is for my learning journey—what I study, what I
-            struggle with, and what I learn while becoming a better developer.
+            This space is for my learning journey—what I study, what I struggle
+            with, and what I learn while becoming a better developer.
           </p>
         </div>
         <div className="w-full mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           {blogs.length > 0 &&
-            blogs.map((blog) => (
-              <div
-                className="group rounded-2xl overflow-hidden bg-[#0f172a] border border-white/10 hover:border-cyan-500/50 transition-all duration-300"
-                key={blog.id}
-              >
-                <div className="overflow-hidden">
-                  <img
-                    src={`${import.meta.env.VITE_API_URL}/storage/${
-                      blog.cover_image
-                    }`}
-                    alt={blog.title}
-                    className="w-full h-52 object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                </div>
-
-                <div className="p-6 space-y-4">
-                  <div className="flex flex-wrap gap-2">
-                    {blog.tags.map((b, index) => (
-                      <span
-                        key={index}
-                        className="text-xs px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
-                      >
-                        #{b}
-                      </span>
-                    ))}
-                  </div>
-
-                  <h3 className="text-xl font-semibold tracking-wide text-white group-hover:text-cyan-400 transition">
-                    {blog.title}
-                  </h3>
-
-                  <p className="text-gray-400 text-sm leading-relaxed line-clamp-3">
-                    {blog.content}
-                  </p>
-
-                  <div className="flex items-center justify-between pt-4 border-t border-white/10 text-sm text-gray-500">
-                    <span>{formatDate(blog.join_date)}</span>
-                    <a href="#" target="_blank">
-                      <span className="text-cyan-400 group-hover:underline cursor-pointer">
-                        Read more →
-                      </span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))}
+            blogs.map((blog) => <BlogCard blog={blog} key={blog.id} />)}
         </div>
         {blogStatus === "loading" && (
           <div className="flex gap-x-2 justify-start items-center mt-20">
@@ -498,7 +357,7 @@ const Home = () => {
         )}
       </div>
       {/* Blog end */}
-      
+
       {/* Certicate Start */}
       <div className="w-full md:mt-25 mt-20 space-y-14">
         <div className="space-y-4">
@@ -514,29 +373,10 @@ const Home = () => {
           <div className="w-full flex animate-scrollX">
             {certificates.length > 0 &&
               certificates.map((certificate) => (
-                <div
-                  className="group w-65 shrink-0 rounded-2xl border border-white/10 bg-[#0f172a] overflow-hidden"
+                <CertificateCard
+                  certificate={certificate}
                   key={certificate.id}
-                >
-                  <div className="overflow-hidden">
-                    <img
-                      src={`${import.meta.env.VITE_API_URL}/storage/${
-                        certificate.image
-                      }`}
-                      alt={certificate.title}
-                      className="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                  </div>
-
-                  <div className="p-4 space-y-1">
-                    <h3 className="text-white font-semibold">
-                      {certificate.title}
-                    </h3>
-                    <p className="text-sm text-gray-400">
-                      Issued by {certificate.issuer}
-                    </p>
-                  </div>
-                </div>
+                />
               ))}
           </div>
         </div>
