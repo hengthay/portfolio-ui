@@ -4,10 +4,10 @@ import formatDate from "../../helper/formatDate";
 const ExperienceCard = ({ experience }) => {
   return (
     <li
-      className="relative pl-8 space-y-1.5 leading-relaxed tracking-wide"
+      className="relative pl-12 space-y-1.5"
       key={experience.id}
     >
-      <span className="absolute left-0 top-1 w-3 h-3 rounded-full bg-yellow-500"></span>
+      <span className="absolute left-4.25 top-1 w-3 h-3 rounded-full bg-cyan-400 ring-4 ring-cyan-400/20"></span>
       <div className="flex justify-between items-center">
         <h4 className="text-base font-semibold leading-relaxed tracking-wide">
           {experience.position}

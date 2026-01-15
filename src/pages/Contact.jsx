@@ -1,9 +1,144 @@
-import React from 'react'
-
+import axios from "axios";
+import { useState } from "react";
+import { PiTelegramLogoThin } from "react-icons/pi";
+import Swal from "sweetalert2";
 const Contact = () => {
-  return (
-    <div>Contact</div>
-  )
-}
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
-export default Contact
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    try {
+      const token = import.meta.env.VITE_TELEGRAM_TOKEN;
+      const chatId = import.meta.env.VITE_TELEGRAM_CHATID;
+      const text = `📩 *New Contact Message*%0A👤 Name: ${form.name}%0A📧 Email: ${form.email}%0A📝 Message: ${form.message}`;
+
+      axios
+        .post(
+          `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${text}&parse_mode=Markdown`
+        )
+        .then((res) => {
+          if (res.status === 200) {
+            Swal.fire({
+              title: "Successfully!",
+              icon: "success",
+              draggable: true,
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          Swal.fire({
+            title: "⚠️ Error sending message!",
+            icon: "success",
+            draggable: true,
+          });
+        });
+    } catch (error) {
+      console.log(error);
+    }
+    // reset
+    setForm({ name: "", email: "", subject: "", message: "" });
+  };
+
+  return (
+    <div className="md:p-20 p-6 w-full mx-auto flex flex-col max-w-5xl max-sm:w-100">
+      <div className="mb-10">
+        <h1 className="text-3xl md:text-4xl font-semibold">Contact</h1>
+        <p className="text-gray-400 mt-2">
+          Send me a message or find me on the map.
+        </p>
+      </div>
+      <div className="w-full max-w-5xl mx-auto my-10">
+        <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 p-4 space-y-6">
+          <div className="text-lg font-semibold">
+            <h2>My Location</h2>
+          </div>
+          <div className="w-full h-100">
+            <iframe
+              title="Location Map"
+              referrerPolicy="no-referrer-when-downgrade"
+              loading="lazy"
+              className="w-full h-full"
+              src="https://www.google.com/maps?q=11.5296225,104.9247845&z=18&output=embed"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+      <div className="w-full">
+        <h2 className="text-lg font-semibold mb-4">Send a Message</h2>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="text-sm text-gray-300">Name</label>
+              <input
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                required
+                className="mt-1 w-full rounded-xl bg-black/20 border border-white/10 px-4 py-3 outline-none focus:border-cyan-500"
+                placeholder="Your name"
+                type="text"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm text-gray-300">Email</label>
+              <input
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                required
+                className="mt-1 w-full rounded-xl bg-black/20 border border-white/10 px-4 py-3 outline-none focus:border-cyan-500"
+                placeholder="you@email.com"
+                type="email"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="text-sm text-gray-300">Message</label>
+            <textarea
+              name="message"
+              value={form.message}
+              onChange={handleChange}
+              required
+              rows={6}
+              className="mt-1 w-full rounded-xl bg-black/20 border border-white/10 px-4 py-3 outline-none focus:border-cyan-500 resize-none"
+              placeholder="Write your message..."
+            />
+          </div>
+
+          <div className="flex justify-end">
+            <button
+              type="submit"
+              className="flex gap-x-2 cursor-pointer px-6 rounded-xl bg-cyan-500 hover:bg-cyan-600 text-black font-semibold py-3 transition"
+            >
+              <PiTelegramLogoThin size={28} />
+              Send Message
+            </button>
+          </div>
+          {/* Optional contact info */}
+          <div className="pt-4 space-y-1">
+            <p className="text-gray-400 text-sm">📍 Phnom Penh, Cambodia</p>
+            <p className="text-gray-400 text-sm">
+              ✉️ laovkimhengthay@gmail.com
+            </p>
+            <p className="text-gray-400 text-sm">📞 +855 10 567 684</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default Contact;

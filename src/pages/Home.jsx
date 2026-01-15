@@ -5,6 +5,8 @@ import { FaFacebookF } from "react-icons/fa";
 import { FaDiscord } from "react-icons/fa6";
 import { MdOutlineEmail } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
+import { GiBookAura } from "react-icons/gi";
+import { PiBagLight } from "react-icons/pi";
 import {
   fetchProfiles,
   selectProfile,
@@ -263,26 +265,6 @@ const Home = () => {
       </div>
       {/* Skill end */}
 
-      {/* Experiences start */}
-      <div className="w-full md:mt-20 mt-15 space-y-14">
-        <div className="md:space-y-12 space-y-8">
-          <h2 className="md:text-4xl text-2xl lg:text-5xl font-bold tracking-wide max-w-3xl">
-            My Experiences
-          </h2>
-          <p className="max-w-xl text-base text-gray-400 tracking-wide leading-relaxed">
-            Here are my works experience that I have been working.
-          </p>
-        </div>
-        <div className="w-full flex flex-col">
-          <ul className="relative space-y-10 before:content-[''] before:absolute before:top-1 before:bottom-0 before:left-1.25 before:w-0.5 before:bg-slate-400">
-            {experiences.length > 0 &&
-              experiences.map((experience) => (
-                <ExperienceCard experience={experience} key={experience.id}/>
-              ))}
-          </ul>
-        </div>
-      </div>
-      {/* Experiences end */}
       {/* Resume start */}
       <div className="w-full md:mt-20 mt-15 space-y-14">
         <div className="md:space-y-12 space-y-8">
@@ -294,8 +276,23 @@ const Home = () => {
             and what I have accomplished so far.
           </p>
         </div>
-        <div className="w-full mt-10">
-          <ul className="relative space-y-10 before:content-[''] before:absolute before:top-1 before:bottom-0 before:left-1.25 before:w-0.5 before:bg-slate-400">
+        <div className="w-full mt-10 relative">
+          <div className="flex items-center gap-x-4 relative">
+            {/* Icon */}
+            <div className="relative z-10 p-3 rounded-2xl bg-slate-900 border border-yellow-400/40">
+              <GiBookAura size={26} className="text-yellow-400" />
+            </div>
+
+            {/* Title */}
+            <h4 className="text-lg md:text-2xl font-semibold text-white tracking-wide">
+              Education
+            </h4>
+          </div>
+
+          {/* Vertical Line from Icon */}
+          <span className="absolute left-5.5 top-14 w-0.5 h-full bg-gray-400/60"></span>
+
+          <ul className="mt-10 space-y-10 relative">
             {resumes.length > 0 &&
               resumes.map((resume) => (
                 <ResumeCard resume={resume} key={resume.id} />
@@ -338,6 +335,32 @@ const Home = () => {
       </div>
       {/* Resume end */}
 
+      {/* Experiences start */}
+      <div className="w-full mt-20 relative">
+          <div className="flex items-center gap-x-4 relative">
+            {/* Icon */}
+            <div className="relative z-10 p-3 rounded-2xl bg-slate-900 border border-yellow-400/40">
+              <PiBagLight size={26} className="text-yellow-400" />
+            </div>
+
+            {/* Title */}
+            <h4 className="text-lg md:text-2xl font-semibold text-white tracking-wide">
+              Experiences
+            </h4>
+          </div>
+
+          {/* Vertical Line from Icon */}
+          <span className="absolute left-5.5 top-14 w-0.5 h-full bg-gray-400/60"></span>
+
+          <ul className="mt-10 space-y-10 relative">
+            {experiences.length > 0 &&
+              experiences.map((experience) => (
+                <ExperienceCard experience={experience} key={experience.id} />
+              ))}
+          </ul>
+      </div>
+      {/* Experiences end */}
+      
       {/* Blog start */}
       <div className="w-full md:mt-20 mt-15">
         <div className="md:space-y-12 space-y-8">
