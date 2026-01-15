@@ -1,16 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPortfolio, selectPortfolio, selectPortfolioStatus } from "../features/portfolios/portfolioSlice";
 
 const Project = () => {
 
+  const [selectType, setSelectType] = useState('All');
   const dispatch = useDispatch();
   const portfolios = useSelector(selectPortfolio);
   const portfolioStatus = useSelector(selectPortfolioStatus);
 
+  const portfoliosType = ["All", "Frontend", "Backend", "Full-Stack"];
+
   useEffect(() => {
     if (portfolioStatus === "idle") dispatch(fetchPortfolio());
   }, [portfolioStatus, dispatch]);
+
+  const filteredPortfolio = portfolios.filter((portfolio) => {
+    return selectType === "All" ? portfolio : portfolio.category === selectType
+  });
 
   return (
     <div className="md:p-20 p-6 w-full mx-auto flex flex-col max-w-7xl max-sm:w-100">
@@ -25,10 +32,20 @@ const Project = () => {
             a few of my favorites.
           </p>
         </div>
-
+        <div className="w-full flex flex-wrap justify-start items-center gap-4">
+          {
+            portfoliosType.map((type, index) => (
+              <span 
+              onClick={() => setSelectType(type)}
+              className={`px-4 py-1.5 rounded-md transition-colors ease-linear duration-200 cursor-pointer text-white ${selectType === type ? 'bg-blue-800' : 'bg-slate-800/80 hover:bg-slate-900'}`} 
+              key={index}
+              >{type}</span>
+            ))
+          }
+        </div>
         <div className="w-full grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-14 mt-6">
           {portfolios.length > 0 &&
-            portfolios.map((port) => (
+            filteredPortfolio.map((port) => (
               <div
                 key={port.id}
                 className="group rounded-2xl border border-white/10 bg-slate-900/40 shadow-md overflow-hidden

@@ -42,6 +42,12 @@ import SkillCard from "../components/Skill/SkillCard";
 import ResumeCard from "../components/Resume/ResumeCard";
 import BlogCard from "../components/Blog/BlogCard";
 import CertificateCard from "../components/Certificate/CertificateCard";
+import {
+  fetchExperience,
+  selectExperience,
+  selectExperienceStatus,
+} from "../features/experiences/experienceSlice";
+import ExperienceCard from "../components/Experience/ExperienceCard";
 
 const Home = () => {
   const profiles = useSelector(selectProfile);
@@ -57,6 +63,8 @@ const Home = () => {
   const skillStatus = useSelector(selectSkillsStatus);
   const certificates = useSelector(selectCertificate);
   const certificateStatus = useSelector(selectCertificateStatus);
+  const experiences = useSelector(selectExperience);
+  const experienceStatus = useSelector(selectExperienceStatus);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -72,6 +80,8 @@ const Home = () => {
       if (skillStatus === "idle") dispatch(fetchSkill());
 
       if (certificateStatus === "idle") dispatch(fetchCertificate());
+
+      if (experienceStatus === "idle") dispatch(fetchExperience());
     } catch (error) {
       console.log(error);
     }
@@ -253,6 +263,26 @@ const Home = () => {
       </div>
       {/* Skill end */}
 
+      {/* Experiences start */}
+      <div className="w-full md:mt-20 mt-15 space-y-14">
+        <div className="md:space-y-12 space-y-8">
+          <h2 className="md:text-4xl text-2xl lg:text-5xl font-bold tracking-wide max-w-3xl">
+            My Experiences
+          </h2>
+          <p className="max-w-xl text-base text-gray-400 tracking-wide leading-relaxed">
+            Here are my works experience that I have been working.
+          </p>
+        </div>
+        <div className="w-full flex flex-col">
+          <ul className="relative space-y-10 before:content-[''] before:absolute before:top-1 before:bottom-0 before:left-1.25 before:w-0.5 before:bg-slate-400">
+            {experiences.length > 0 &&
+              experiences.map((experience) => (
+                <ExperienceCard experience={experience} key={experience.id}/>
+              ))}
+          </ul>
+        </div>
+      </div>
+      {/* Experiences end */}
       {/* Resume start */}
       <div className="w-full md:mt-20 mt-15 space-y-14">
         <div className="md:space-y-12 space-y-8">

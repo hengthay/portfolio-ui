@@ -5,6 +5,7 @@ import resumeReducer from '../features/resumes/resumeSlice';
 import blogReducer from '../features/blogs/blogSlice';
 import skillReducer from '../features/skills/skillSlice';
 import certificateReducer from '../features/certificates/certificateSlice';
+import experienceReducer from '../features/experiences/experienceSlice';
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     blogs: blogReducer,
     skills: skillReducer,
     certificates: certificateReducer,
+    experiences: experienceReducer
   }
 })
 
