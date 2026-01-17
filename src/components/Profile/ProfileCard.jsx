@@ -1,8 +1,15 @@
+import { motion } from "framer-motion";
 import React from "react";
 
 const ProfileCard = ({ profile }) => {
   return (
-    <div key={profile.id} className="mt-8 space-y-14">
+    <motion.div
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3, ease: "easeIn" }}
+      key={profile.id}
+      className="mt-8 space-y-14"
+    >
       <div>
         <h1 className="md:text-5xl text-3xl lg:text-6xl font-bold tracking-wide">
           Hi, I'm {profile.name}
@@ -14,7 +21,7 @@ const ProfileCard = ({ profile }) => {
         </p>
         <p className="max-w-xl text-base text-gray-400">{profile.bio}</p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

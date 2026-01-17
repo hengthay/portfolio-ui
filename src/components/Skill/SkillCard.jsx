@@ -1,8 +1,14 @@
 import React from "react";
-
+import { motion } from "framer-motion";
 const SkillCard = ({ skill }) => {
   return (
-    <div key={skill.id}>
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: "easeIn" }}
+      viewport={{ once: true, amount: 0.3 }}
+      key={skill.id}
+    >
       <div className="flex justify-between text-sm text-gray-400 space-y-2">
         <span className="text-gray-400">{skill.name}</span>
         <span className="text-yellow-400 font-semibold">{skill.level}%</span>
@@ -15,7 +21,7 @@ const SkillCard = ({ skill }) => {
           style={{ width: `${skill.level}%` }}
         ></div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

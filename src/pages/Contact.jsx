@@ -2,6 +2,13 @@ import axios from "axios";
 import { useState } from "react";
 import { PiTelegramLogoThin } from "react-icons/pi";
 import Swal from "sweetalert2";
+import { motion } from "framer-motion";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 18 },
+  show: { opacity: 1, y: 0 },
+};
+
 const Contact = () => {
   const [form, setForm] = useState({
     name: "",
@@ -38,26 +45,38 @@ const Contact = () => {
           console.log(err);
           Swal.fire({
             title: "⚠️ Error sending message!",
-            icon: "success",
+            icon: "error",
             draggable: true,
           });
         });
     } catch (error) {
       console.log(error);
     }
-    // reset
-    setForm({ name: "", email: "", subject: "", message: "" });
+
+    // reset (you had subject but no subject field)
+    setForm({ name: "", email: "", message: "" });
   };
 
   return (
-    <div className="md:p-20 p-6 w-full mx-auto flex flex-col max-w-5xl max-sm:w-100">
-      <div className="mb-10">
+    <motion.div
+      initial="hidden"
+      animate="show"
+      variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
+      className="md:p-20 p-6 w-full mx-auto flex flex-col max-w-5xl max-sm:w-100"
+    >
+      {/* Header */}
+      <motion.div variants={fadeUp} transition={{ duration: 0.5, ease: "easeOut" }} className="mb-10">
         <h1 className="text-3xl md:text-4xl font-semibold">Contact</h1>
-        <p className="text-gray-400 mt-2">
-          Send me a message or find me on the map.
-        </p>
-      </div>
-      <div className="w-full max-w-5xl mx-auto my-10">
+        <p className="text-gray-400 mt-2">Send me a message or find me on the map.</p>
+      </motion.div>
+
+      {/* Map */}
+      <motion.div
+        variants={fadeUp}
+        transition={{ duration: 0.55, ease: "easeOut" }}
+        whileHover={{ scale: 1.01 }}
+        className="w-full max-w-5xl mx-auto my-10"
+      >
         <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/5 p-4 space-y-6">
           <div className="text-lg font-semibold">
             <h2>My Location</h2>
@@ -72,13 +91,18 @@ const Contact = () => {
             ></iframe>
           </div>
         </div>
-      </div>
-      <div className="w-full">
+      </motion.div>
+
+      {/* Form */}
+      <motion.div variants={fadeUp} transition={{ duration: 0.55, ease: "easeOut" }} className="w-full">
         <h2 className="text-lg font-semibold mb-4">Send a Message</h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
+            <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.45, ease: "easeOut" }}
+            >
               <label className="text-sm text-gray-300">Name</label>
               <input
                 name="name"
@@ -89,9 +113,12 @@ const Contact = () => {
                 placeholder="Your name"
                 type="text"
               />
-            </div>
+            </motion.div>
 
-            <div>
+            <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.45, ease: "easeOut" }}
+            >
               <label className="text-sm text-gray-300">Email</label>
               <input
                 name="email"
@@ -102,10 +129,10 @@ const Contact = () => {
                 placeholder="you@email.com"
                 type="email"
               />
-            </div>
+            </motion.div>
           </div>
 
-          <div>
+          <motion.div variants={fadeUp} transition={{ duration: 0.45, ease: "easeOut" }}>
             <label className="text-sm text-gray-300">Message</label>
             <textarea
               name="message"
@@ -116,28 +143,29 @@ const Contact = () => {
               className="mt-1 w-full rounded-xl bg-black/20 border border-white/10 px-4 py-3 outline-none focus:border-cyan-500 resize-none"
               placeholder="Write your message..."
             />
-          </div>
+          </motion.div>
 
-          <div className="flex justify-end">
-            <button
+          <motion.div variants={fadeUp} transition={{ duration: 0.45, ease: "easeOut" }} className="flex justify-end">
+            <motion.button
               type="submit"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
               className="flex gap-x-2 cursor-pointer px-6 rounded-xl bg-cyan-500 hover:bg-cyan-600 text-black font-semibold py-3 transition"
             >
               <PiTelegramLogoThin size={28} />
               Send Message
-            </button>
-          </div>
-          {/* Optional contact info */}
-          <div className="pt-4 space-y-1">
+            </motion.button>
+          </motion.div>
+
+          {/* Contact info */}
+          <motion.div variants={fadeUp} transition={{ duration: 0.45, ease: "easeOut" }} className="pt-4 space-y-1">
             <p className="text-gray-400 text-sm">📍 Phnom Penh, Cambodia</p>
-            <p className="text-gray-400 text-sm">
-              ✉️ laovkimhengthay@gmail.com
-            </p>
+            <p className="text-gray-400 text-sm">✉️ laovkimhengthay@gmail.com</p>
             <p className="text-gray-400 text-sm">📞 +855 10 567 684</p>
-          </div>
+          </motion.div>
         </form>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

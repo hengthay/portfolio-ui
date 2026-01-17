@@ -1,10 +1,29 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBlog, selectBlogs, selectBlogsStatus } from "../features/blogs/blogSlice";
+import {
+  fetchBlog,
+  selectBlogs,
+  selectBlogsStatus,
+} from "../features/blogs/blogSlice";
 import formatDate from "../helper/formatDate";
+import { motion } from "framer-motion";
+
+const allInTitle = {
+  hidden: { opacity: 0, y: -50 },
+  show: { opacity: 1, y: 0 },
+};
+
+const allInSubTitle = {
+  hidden: { opacity: 0, y: 50 },
+  show: { opacity: 1, y: 0 },
+};
+
+const reveal = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0 },
+};
 
 const Blog = () => {
-
   const dispatch = useDispatch();
   const blogs = useSelector(selectBlogs);
   const blogStatus = useSelector(selectBlogsStatus);
@@ -13,23 +32,41 @@ const Blog = () => {
     if (blogStatus === "idle") dispatch(fetchBlog());
   }, [blogStatus, dispatch]);
 
-
   return (
     <div className="md:p-20 p-6 w-full mx-auto flex flex-col max-w-7xl max-sm:w-100">
       <div className="w-full md:mt-20 mt-15">
         <div className="md:space-y-12 space-y-8">
-          <h2 className="md:text-4xl text-2xl lg:text-5xl font-bold tracking-wide max-w-3xl">
+          <motion.h2
+            variants={allInTitle}
+            initial="hidden"
+            animate="show"
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="md:text-4xl text-2xl lg:text-5xl font-bold tracking-wide max-w-3xl"
+          >
             What I am learning as a developer.
-          </h2>
-          <p className="max-w-xl text-base text-gray-400 tracking-wide leading-relaxed">
+          </motion.h2>
+          <motion.p
+            variants={allInSubTitle}
+            initial="hidden"
+            animate="show"
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="max-w-xl text-base text-gray-400 tracking-wide leading-relaxed"
+          >
             This space is for my learning journey—what I study, what I struggle
             with, and what I learn while becoming a better developer.
-          </p>
+          </motion.p>
         </div>
-        <div className="w-full mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        <motion.div
+          initial="hidden"
+          animate="show"
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="w-full mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3"
+        >
           {blogs.length > 0 &&
             blogs.map((blog) => (
-              <div
+              <motion.div
+                variants={reveal}
+                transition={{ duration: 0.7, ease: "easeInOut" }}
                 className="group rounded-2xl overflow-hidden bg-[#0f172a] border border-white/10 hover:border-cyan-500/50 transition-all duration-300"
                 key={blog.id}
               >
@@ -72,9 +109,9 @@ const Blog = () => {
                     </a>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-        </div>
+        </motion.div>
         {blogStatus === "loading" && (
           <div className="flex gap-x-2 justify-start items-center mt-20">
             <p className="text-gray-300 font-medium md:text-base text-sm">

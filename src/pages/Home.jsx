@@ -22,7 +22,6 @@ import {
   selectResume,
   selectResumeStatus,
 } from "../features/resumes/resumeSlice";
-import formatDate from "../helper/formatDate";
 import {
   fetchBlog,
   selectBlogs,
@@ -50,6 +49,42 @@ import {
   selectExperienceStatus,
 } from "../features/experiences/experienceSlice";
 import ExperienceCard from "../components/Experience/ExperienceCard";
+import { motion } from "framer-motion";
+
+const allInTitle = {
+  hidden: { opacity: 0, y: -50 },
+  show: { opacity: 1, y: 0 },
+};
+
+const allInSubTitle = {
+  hidden: { opacity: 0, y: 50 },
+  show: { opacity: 1, y: 0 },
+};
+
+const sectionWrap = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1 },
+};
+
+const headerAnim = {
+  hidden: { opacity: 0, y: -16 },
+  show: { opacity: 1, y: 0 },
+};
+
+const lineAnim = {
+  hidden: { scaleY: 0 },
+  show: { scaleY: 1 },
+};
+
+const listAnim = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.12, delayChildren: 0.08 } },
+};
+
+const fade = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1 },
+};
 
 const Home = () => {
   const profiles = useSelector(selectProfile);
@@ -87,7 +122,16 @@ const Home = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [status, portfolioStatus, dispatch]);
+  }, [
+    status,
+    portfolioStatus,
+    experienceStatus,
+    certificateStatus,
+    skillStatus,
+    blogStatus,
+    resumeStatus,
+    dispatch,
+  ]);
 
   // console.log(portfolios);
   // console.log(profiles);
@@ -144,7 +188,13 @@ const Home = () => {
           </div>
         )}
       </div>
-      <div className="w-full mt-20">
+
+      <motion.div
+        initial={{ opacity: 0, x: -200 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.9, ease: "easeInOut" }}
+        className="w-full mt-20"
+      >
         <ul className="flex justify-center items-center md:justify-start md:items-start md:gap-x-2 gap-x-2">
           {foot.map((item) => (
             <li key={item.id} className="text-white/80">
@@ -157,20 +207,33 @@ const Home = () => {
             </li>
           ))}
         </ul>
-      </div>
+      </motion.div>
 
       {/* Portfolio Start */}
       <div className="w-full flex flex-col mt-25 space-y-14">
-        <div className="md:space-y-12 space-y-8">
-          <h2 className="md:text-4xl text-2xl lg:text-5xl font-bold tracking-wide max-w-3xl">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          className="md:space-y-12 space-y-8"
+        >
+          <motion.h2
+            variants={allInTitle}
+            transition={{ duration: 0.5, ease: "easeIn" }}
+            className="md:text-4xl text-2xl lg:text-5xl font-bold tracking-wide max-w-3xl"
+          >
             What I've done and what I'm doing.
-          </h2>
-          <p className="max-w-2xl text-base text-gray-400 tracking-wide leading-relaxed">
+          </motion.h2>
+          <motion.p
+            variants={allInSubTitle}
+            transition={{ duration: 0.5, ease: "easeIn" }}
+            className="max-w-2xl text-base text-gray-400 tracking-wide leading-relaxed"
+          >
             I've worked on a variety of projects, from simple websites to
             complex web applications. And many of them are open-source. Here are
             a few of my favorites.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         <div className="w-full grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-14 mt-6">
           {portfolios.length > 0 &&
@@ -215,16 +278,29 @@ const Home = () => {
 
       {/* Skill Start */}
       <div className="w-full md:mt-20 mt-15 space-y-14">
-        <div className="md:space-y-12 space-y-8">
-          <h2 className="md:text-4xl text-2xl lg:text-5xl font-bold tracking-wide max-w-3xl">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          className="md:space-y-12 space-y-8"
+        >
+          <motion.h2
+            variants={allInTitle}
+            transition={{ duration: 0.5, ease: "easeIn" }}
+            className="md:text-4xl text-2xl lg:text-5xl font-bold tracking-wide max-w-3xl"
+          >
             My Skill
-          </h2>
-          <p className="max-w-xl text-base text-gray-400 tracking-wide leading-relaxed">
+          </motion.h2>
+          <motion.p
+            variants={allInSubTitle}
+            transition={{ duration: 0.5, ease: "easeIn" }}
+            className="max-w-xl text-base text-gray-400 tracking-wide leading-relaxed"
+          >
             These are the skills I’m currently working with and improving every
             day as I grow as a web developer through real projects and constant
             practice.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         <div className="w-full space-y-4">
           {skills.length > 0 &&
@@ -267,30 +343,64 @@ const Home = () => {
 
       {/* Resume start */}
       <div className="w-full md:mt-20 mt-15 space-y-14">
-        <div className="md:space-y-12 space-y-8">
-          <h2 className="md:text-4xl text-2xl lg:text-5xl font-bold tracking-wide max-w-3xl">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          className="md:space-y-12 space-y-8"
+        >
+          <motion.h2
+            variants={allInTitle}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="md:text-4xl text-2xl lg:text-5xl font-bold tracking-wide max-w-3xl"
+          >
             My Resume
-          </h2>
-          <p className="max-w-xl text-base text-gray-400 tracking-wide leading-relaxed">
-            Here is my educational background, highlighting my qualifications
-            and what I have accomplished so far.
-          </p>
-        </div>
-        <div className="w-full mt-10 relative">
-          <div className="flex items-center gap-x-4 relative">
+          </motion.h2>
+          <motion.p
+            variants={allInSubTitle}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="max-w-xl text-base text-gray-400 tracking-wide leading-relaxed"
+          >
+            Here is my educational background and works experiences that I have
+            been doing, highlighting my qualifications and what I have
+            accomplished so far.
+          </motion.p>
+        </motion.div>
+        <motion.div
+          variants={sectionWrap}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="w-full mt-10 relative"
+        >
+          <motion.div
+            variants={headerAnim}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="flex items-center gap-x-4 relative"
+          >
             {/* Icon */}
-            <div className="relative z-10 p-3 rounded-2xl bg-slate-900 border border-yellow-400/40">
+            <motion.div
+              whileHover={{ scale: 1.06 }}
+              transition={{ type: "spring", stiffness: 260, damping: 16 }}
+              className="relative z-10 p-3 rounded-2xl bg-slate-900 border border-yellow-400/40"
+            >
               <GiBookAura size={26} className="text-yellow-400" />
-            </div>
+            </motion.div>
 
             {/* Title */}
             <h4 className="text-lg md:text-2xl font-semibold text-white tracking-wide">
               Education
             </h4>
-          </div>
+          </motion.div>
 
           {/* Vertical Line from Icon */}
-          <span className="absolute left-5.5 top-14 w-0.5 h-full bg-gray-400/60"></span>
+          <motion.span
+            variants={lineAnim}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+            style={{ transformOrigin: "top" }}
+            className={`absolute left-5.5 top-14 w-0.5 bg-gray-400/60 ${resumeStatus === "failed" || resumeStatus === "loading" ? "h-15" : "h-full"}`}
+          ></motion.span>
 
           <ul className="mt-10 space-y-10 relative">
             {resumes.length > 0 &&
@@ -331,47 +441,112 @@ const Home = () => {
               </p>
             </div>
           )}
-        </div>
+        </motion.div>
       </div>
       {/* Resume end */}
 
       {/* Experiences start */}
-      <div className="w-full mt-20 relative">
-          <div className="flex items-center gap-x-4 relative">
-            {/* Icon */}
-            <div className="relative z-10 p-3 rounded-2xl bg-slate-900 border border-yellow-400/40">
-              <PiBagLight size={26} className="text-yellow-400" />
-            </div>
+      <motion.div
+        variants={sectionWrap}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+        className="w-full mt-20 relative"
+      >
+        <motion.div
+          variants={headerAnim}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="flex items-center gap-x-4 relative"
+        >
+          {/* Icon */}
+          <motion.div
+            whileHover={{ scale: 1.06 }}
+            transition={{ type: "spring", stiffness: 260, damping: 16 }}
+            className="relative z-10 p-3 rounded-2xl bg-slate-900 border border-yellow-400/40"
+          >
+            <PiBagLight size={26} className="text-yellow-400" />
+          </motion.div>
 
-            {/* Title */}
-            <h4 className="text-lg md:text-2xl font-semibold text-white tracking-wide">
-              Experiences
-            </h4>
+          {/* Title */}
+          <h4 className="text-lg md:text-2xl font-semibold text-white tracking-wide">
+            Experiences
+          </h4>
+        </motion.div>
+
+        {/* Vertical Line from Icon */}
+        <motion.span
+          variants={lineAnim}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+          style={{ transformOrigin: "top" }}
+          className={`absolute left-5.5 top-14 w-0.5 bg-gray-400/60 ${experienceStatus === "failed" || experienceStatus === "loading" ? "h-15" : "h-full"}`}
+        ></motion.span>
+
+        <ul className="mt-10 space-y-10 relative">
+          {experiences.length > 0 &&
+            experiences.map((experience) => (
+              <ExperienceCard experience={experience} key={experience.id} />
+            ))}
+        </ul>
+        {experienceStatus === "loading" && (
+          <div className="flex gap-x-2 justify-start items-center mt-20">
+            <p className="text-gray-300 font-medium md:text-base text-sm">
+              Loading
+            </p>
+            <p className="w-8 h-8 rounded-full border-2 border-t-transparent border-gray-400 animate-spin"></p>
           </div>
+        )}
+        {experienceStatus === "failed" && (
+          <div className="flex gap-x-2 justify-start items-center mt-20 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="shrink-0"
+            >
+              {/* Circle */}
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
 
-          {/* Vertical Line from Icon */}
-          <span className="absolute left-5.5 top-14 w-0.5 h-full bg-gray-400/60"></span>
+              {/* Exclamation line */}
+              <rect x="11" y="6" width="2" height="9" fill="red" />
 
-          <ul className="mt-10 space-y-10 relative">
-            {experiences.length > 0 &&
-              experiences.map((experience) => (
-                <ExperienceCard experience={experience} key={experience.id} />
-              ))}
-          </ul>
-      </div>
+              {/* Exclamation dot */}
+              <circle cx="12" cy="18" r="1.3" fill="red" />
+            </svg>
+            <p className="text-red-400 font-medium md:text-base text-sm">
+              Failed to get profile data. It might be Internal Server Error!
+            </p>
+          </div>
+        )}
+      </motion.div>
       {/* Experiences end */}
-      
+
       {/* Blog start */}
       <div className="w-full md:mt-20 mt-15">
-        <div className="md:space-y-12 space-y-8">
-          <h2 className="md:text-4xl text-2xl lg:text-5xl font-bold tracking-wide max-w-3xl">
+        <motion.div
+          variants={sectionWrap}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.25 }}
+          className="md:space-y-12 space-y-8"
+        >
+          <motion.h2
+            variants={allInTitle}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="md:text-4xl text-2xl lg:text-5xl font-bold tracking-wide max-w-3xl"
+          >
             What I am learning as a developer.
-          </h2>
-          <p className="max-w-xl text-base text-gray-400 tracking-wide leading-relaxed">
+          </motion.h2>
+          <motion.p
+            variants={allInSubTitle}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="max-w-xl text-base text-gray-400 tracking-wide leading-relaxed"
+          >
             This space is for my learning journey—what I study, what I struggle
             with, and what I learn while becoming a better developer.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
         <div className="w-full mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           {blogs.length > 0 &&
             blogs.map((blog) => <BlogCard blog={blog} key={blog.id} />)}
@@ -413,17 +588,40 @@ const Home = () => {
 
       {/* Certicate Start */}
       <div className="w-full md:mt-25 mt-20 space-y-14">
-        <div className="space-y-4">
-          <h2 className="md:text-4xl text-2xl lg:text-5xl font-bold tracking-wide">
+        <motion.div
+          variants={sectionWrap}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.25 }}
+          className="md:space-y-12 space-y-8"
+        >
+          <motion.h2
+            variants={allInTitle}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="md:text-4xl text-2xl lg:text-5xl font-bold tracking-wide"
+          >
             My Certificates
-          </h2>
-          <p className="max-w-xl text-base text-gray-400 tracking-wide leading-relaxed">
+          </motion.h2>
+          <motion.p
+            variants={allInSubTitle}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="max-w-xl text-base text-gray-400 tracking-wide leading-relaxed"
+          >
             Certifications I’ve earned through continuous learning and
             professional development.
-          </p>
-        </div>
-        <div className="relative w-full overflow-hidden">
-          <div className="w-full flex animate-scrollX">
+          </motion.p>
+        </motion.div>
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.25 }}
+          className="relative w-full overflow-hidden"
+        >
+          <motion.div
+            variants={fade}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="w-full flex animate-scrollX"
+          >
             {certificates.length > 0 &&
               certificates.map((certificate) => (
                 <CertificateCard
@@ -431,8 +629,8 @@ const Home = () => {
                   key={certificate.id}
                 />
               ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
         {certificateStatus === "loading" && (
           <div className="flex gap-x-2 justify-start items-center mt-20">
             <p className="text-gray-300 font-medium md:text-base text-sm">

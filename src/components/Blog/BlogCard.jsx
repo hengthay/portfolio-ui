@@ -1,9 +1,14 @@
 import React from "react";
 import formatDate from "../../helper/formatDate";
+import { motion } from "framer-motion";
 
 const BlogCard = ({ blog }) => {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 50, }}
+      whileInView={{ opacity: 1, y: 0}}
+      transition={{ duration: 0.7, ease: "easeIn" }}
+      viewport={{ once: true, amount: 0.3 }}
       className="group rounded-2xl overflow-hidden bg-[#0f172a] border border-white/10 hover:border-cyan-500/50 transition-all duration-300"
       key={blog.id}
     >
@@ -44,7 +49,7 @@ const BlogCard = ({ blog }) => {
           </a>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
