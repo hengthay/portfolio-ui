@@ -23,8 +23,9 @@ export const fetchProfiles = createAsyncThunk(
       
       return res?.data?.data ?? [];
     } catch (error) {
-      console.log('Error to get profiles - ', error);
-      return thunkAPI.rejectWithValue(error);
+      console.log('Error to get profiles - ', error.response);
+      const msg = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(msg);
     }
   }
 );

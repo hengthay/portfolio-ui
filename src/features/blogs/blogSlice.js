@@ -22,8 +22,9 @@ export const fetchBlog = createAsyncThunk(
 
       return res?.data?.data ?? [];
     } catch (error) {
-      console.log('Failed to get blogs - ', error);
-      return thunkAPI.rejectWithValue(error);
+      console.log('Failed to get blogs - ', error.response);
+      const msg = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(msg);
     }
   }
 )

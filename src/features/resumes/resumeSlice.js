@@ -22,8 +22,9 @@ export const fetchResume = createAsyncThunk(
 
       return res?.data?.data ?? [];
     } catch (error) {
-      console.log('Error to get resumes - ', error);
-      return thunkAPI.rejectWithValue(error);
+      console.log('Error to get resumes - ', error.message);
+      const msg = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(msg);
     }
   }
 )

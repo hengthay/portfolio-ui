@@ -22,8 +22,9 @@ export const fetchSkill = createAsyncThunk(
 
       return res?.data?.data ?? [];
     } catch (error) {
-      console.log('Failed to get skills - ', error);
-      return thunkAPI.rejectWithValue(error);
+      console.log('Failed to get skills - ', error.message);
+      const msg = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(msg);
     }
   }
 )

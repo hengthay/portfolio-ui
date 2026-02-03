@@ -22,8 +22,9 @@ export const fetchCertificate = createAsyncThunk(
 
       return res?.data?.data ?? [];
     } catch (error) {
-      console.log('Failed to get certificates - ', error);
-      return thunkAPI.rejectWithValue(error);
+      console.log('Failed to get certificates - ', error.response);
+      const msg = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(msg);
     }
   }
 )

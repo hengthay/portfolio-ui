@@ -24,8 +24,9 @@ export const fetchPortfolio = createAsyncThunk(
 
       return res?.data?.data ?? [];
     } catch (error) {
-      console.log('Error to get portfolios - ', error);
-      return thunkAPI.rejectWithValue(error);
+      console.log('Error to get portfolios - ', error.message);
+      const msg = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(msg);
     }
   }
 );

@@ -1,4 +1,3 @@
-import React from "react";
 import formatDate from "../../helper/formatDate";
 import { motion } from "framer-motion";
 
