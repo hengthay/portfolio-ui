@@ -6,6 +6,7 @@ import {
   selectPortfolioStatus,
 } from "../features/portfolios/portfolioSlice";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const allInTitle = {
   hidden: { opacity: 0, y: -50 },
@@ -140,6 +141,11 @@ const Project = () => {
                         {tech}
                       </span>
                     ))}
+                  </div>
+                  <div className="flex justify-end items-center my-2">
+                    <Link to={`/portfolio/${port.id}`} className="w-30 p-2 text-center rounded-xl bg-slate-800 hover:bg-slate-900 transition-all ease-in-out border-0 outline-1 outline-gray-400 duration-300 hover:outline-cyan-400 mt-1">
+                      View
+                    </Link>
                   </div>
                 </div>
               </motion.div>

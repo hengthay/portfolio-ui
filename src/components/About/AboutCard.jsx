@@ -19,7 +19,7 @@ const AboutCard = ({ profile }) => {
         ))}
         <a
           href={`${import.meta.env.VITE_API_URL}/storage/${profile.resume_url}`}
-          download="Corey_Chiu_Resume.pdf"
+          download="Hengthay.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="bg-black shadow-md shadow-gray-800 py-2 px-4 font-semibold rounded-lg hover:bg-transparent border border-transparent hover:border-gray-400 transition-all ease-in-out duration-300"

@@ -1,5 +1,5 @@
-import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const PortfolioCard = ({ port }) => {
   return (
@@ -10,7 +10,7 @@ const PortfolioCard = ({ port }) => {
       viewport={{ once: true, amount: 0.3 }}
       key={port.id}
       className="group rounded-2xl border border-white/10 bg-slate-900/40 shadow-md overflow-hidden
-                  transition duration-300 hover:-translate-y-2 hover:shadow-2xl"
+      transition duration-300 hover:-translate-y-2 hover:shadow-2xl"
     >
       <div className="relative h-48 overflow-hidden">
         <img
@@ -19,8 +19,7 @@ const PortfolioCard = ({ port }) => {
           className="w-full h-full object-cover transition duration-500 group-hover:scale-110"
         />
         <div
-          className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 
-                      transition flex items-center justify-center gap-4"
+          className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-4"
         >
           <a
             href={`${port.demo_url}`}
@@ -54,6 +53,11 @@ const PortfolioCard = ({ port }) => {
               {tech}
             </span>
           ))}
+        </div>
+        <div className="flex justify-end items-center my-2">
+          <Link to={`/portfolio/${port.id}`} className="w-30 p-2 text-center rounded-xl bg-slate-800 hover:bg-slate-900 transition-all ease-in-out border-0 outline-1 outline-gray-400 duration-300 hover:outline-cyan-400 mt-1">
+            View
+          </Link>
         </div>
       </div>
     </motion.div>

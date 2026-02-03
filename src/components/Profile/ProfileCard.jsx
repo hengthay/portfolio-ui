@@ -10,7 +10,7 @@ const ProfileCard = ({ profile }) => {
       key={profile.id}
       className="mt-8 space-y-14"
     >
-      <div>
+      <div className="flex gap-x-2 items-center">
         <h1 className="md:text-5xl text-3xl lg:text-6xl font-bold tracking-wide">
           Hi, I'm {profile.name}
         </h1>

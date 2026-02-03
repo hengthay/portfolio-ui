@@ -269,7 +269,7 @@ const Home = () => {
               <circle cx="12" cy="18" r="1.3" fill="red" />
             </svg>
             <p className="text-red-400 font-medium md:text-base text-sm">
-              Failed to get profile data. It might be Internal Server Error!
+              Failed to get portfolios data. It might be Internal Server Error!
             </p>
           </div>
         )}
@@ -334,7 +334,7 @@ const Home = () => {
               <circle cx="12" cy="18" r="1.3" fill="red" />
             </svg>
             <p className="text-red-400 font-medium md:text-base text-sm">
-              Failed to get profile data. It might be Internal Server Error!
+              Failed to get skills data. It might be Internal Server Error!
             </p>
           </div>
         )}
@@ -437,7 +437,7 @@ const Home = () => {
                 <circle cx="12" cy="18" r="1.3" fill="red" />
               </svg>
               <p className="text-red-400 font-medium md:text-base text-sm">
-                Failed to get profile data. It might be Internal Server Error!
+                Failed to get educations data. It might be Internal Server Error!
               </p>
             </div>
           )}
@@ -515,7 +515,7 @@ const Home = () => {
               <circle cx="12" cy="18" r="1.3" fill="red" />
             </svg>
             <p className="text-red-400 font-medium md:text-base text-sm">
-              Failed to get profile data. It might be Internal Server Error!
+              Failed to get experiences data. It might be Internal Server Error!
             </p>
           </div>
         )}
@@ -579,7 +579,7 @@ const Home = () => {
               <circle cx="12" cy="18" r="1.3" fill="red" />
             </svg>
             <p className="text-red-400 font-medium md:text-base text-sm">
-              Failed to get profile data. It might be Internal Server Error!
+              Failed to get blogs data. It might be Internal Server Error!
             </p>
           </div>
         )}
@@ -659,7 +659,7 @@ const Home = () => {
               <circle cx="12" cy="18" r="1.3" fill="red" />
             </svg>
             <p className="text-red-400 font-medium md:text-base text-sm">
-              Failed to get profile data. It might be Internal Server Error!
+              Failed to get certificates data. It might be Internal Server Error!
             </p>
           </div>
         )}

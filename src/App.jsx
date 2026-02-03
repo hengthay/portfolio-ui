@@ -9,6 +9,7 @@ import Contact from './pages/Contact'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import MainLayout from './components/layouts/MainLayout'
+import PortfolioDetail from './components/Portfolio/PortfolioDetail'
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
             <Route path='/' element={<Home />} index/>
             <Route path='/about' element={<About />} />
             <Route path='/portfolio' element={<Project />} />
+            <Route path='/portfolio/:id' element={<PortfolioDetail />} />
             <Route path='/resume' element={<Education />} />
             <Route path='/blog' element={<Blog />} />
             <Route path='/contact' element={<Contact />} />
