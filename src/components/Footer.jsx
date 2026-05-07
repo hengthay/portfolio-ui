@@ -44,7 +44,7 @@ const Footer = () => {
         </ul>
         <div className="w-full text-white md:text-start text-center ">
           <div className="">
-            <p className="text-sm text-gray-400">&copy; {year} Heng Thay. All rights reserved.</p>
+            <p className="text-sm text-gray-400">&copy; {year} <a href="https://github.com/hengthay" className="font-bold" target="_blank">LAOV Kim Heng Thay</a>. All rights reserved.</p>
           </div>
           <div className="w-full my-8">
             <ul className="flex justify-center items-center md:justify-start md:items-start md:gap-x-2 gap-x-2">

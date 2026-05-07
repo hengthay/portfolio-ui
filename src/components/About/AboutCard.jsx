@@ -3,7 +3,7 @@ import React from "react";
 const AboutCard = ({ profile }) => {
   return (
     <div
-      className="w-full grid sm:grid-cols-2 gap-10 grid-cols-1"
+      className="w-full grid sm:grid-cols-2 gap-10 grid-cols-1 sm:my-10"
       key={profile.id}
     >
       <div className="space-y-14 md:order-1 order-2">
@@ -31,7 +31,7 @@ const AboutCard = ({ profile }) => {
         <img
           src={`${import.meta.env.VITE_API_URL}/storage/${profile.avatar_url}`}
           alt={profile.name}
-          className="sm:w-125 sm:h-auto w-75 h-auto rounded-2xl"
+          className="sm:w-125 sm:h-auto w-full h-auto rounded-2xl"
         />
       </div>
     </div>
