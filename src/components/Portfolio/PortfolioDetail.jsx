@@ -18,9 +18,9 @@ const PortfolioDetail = () => {
   const imageSrc = portfolioDetail?.image_url ? `${import.meta.env.VITE_API_URL}/storage/${portfolioDetail?.image_url}` : "";
 
   return (
-    <div className="md:p-20 p-6 w-full mx-auto flex flex-col max-w-7xl max-sm:w-100">
-      <div className="w-full flex flex-col mt-15 space-y-14">
-        <div className='flex justify-between items-center'>
+    <div className="md:p-10 lg:p-20 p-4 w-full mx-auto flex flex-col max-w-7xl overflow-x-hidden">
+      <div className="w-full flex flex-col mt-10 md:mt-15 space-y-8 md:space-y-14">
+        <div className='flex flex-wrap justify-between items-center gap-4'>
           <Link to={'/portfolio'} className='flex items-center gap-x-2'>
             <IoIosArrowRoundBack size={20}/>
             <span className='text-sm'>
@@ -33,7 +33,8 @@ const PortfolioDetail = () => {
         </div>
         <h2 className="md:text-4xl text-2xl lg:text-5xl font-bold tracking-wide max-w-3xl">Overview of Portfolio</h2>
         <p className="max-w-2xl text-base text-gray-400 tracking-wide leading-relaxed">This project overview outlines the goals, features, technologies, and challenges involved in building the application, highlighting key decisions and the value it delivers.</p>
-        <div className='grid grid-cols-12 gap-10 items-start'>
+
+        <div className='grid grid-cols-12 gap-6 lg:gap-10 items-start'>
           <div className='lg:col-span-6 col-span-12 bg-black/30 rounded-2xl'>
             <div className='w-full md:h-100 h-auto'>
               {
@@ -58,13 +59,13 @@ const PortfolioDetail = () => {
             </div>
           </div>
           <div className='lg:col-span-6 col-span-12'>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 md:p-8 space-y-6">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 md:p-8 space-y-6">
             <div className="flex flex-wrap gap-3">
                 <a
                   href={portfolioDetail?.demo_url || "#"}
                   target="_blank"
                   rel="noreferrer"
-                  className={`px-5 py-2.5 rounded-xl font-semibold text-sm transition
+                  className={`flex-1 min-w-25 px-5 py-2.5 rounded-xl font-semibold text-sm transition
                     ${
                       portfolioDetail?.demo_url
                         ? "bg-white text-black hover:bg-gray-200"
@@ -78,7 +79,7 @@ const PortfolioDetail = () => {
                   href={portfolioDetail?.github_url || "#"}
                   target="_blank"
                   rel="noreferrer"
-                  className={`px-5 py-2.5 rounded-xl font-semibold text-sm transition border
+                  className={`flex-1 min-w-25 px-5 py-2.5 rounded-xl font-semibold text-sm transition border
                     ${
                       portfolioDetail?.github_url
                         ? "border-white/15 bg-transparent hover:bg-white/10"
@@ -98,7 +99,8 @@ const PortfolioDetail = () => {
                   Copy Link
                 </button>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:gap-4">
                 <div className="rounded-xl border border-white/10 bg-black/20 p-4">
                   <p className="text-xs text-gray-400">Created</p>
                   <p className="mt-1 text-sm text-gray-200">
@@ -118,7 +120,7 @@ const PortfolioDetail = () => {
               </div>
               <div className="space-y-2">
                 <p className="text-sm font-semibold">Technologies</p>
-                <div className="flex text-nowrap flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2">
                   {portfolioDetail?.technologies?.length ? (
                     portfolioDetail.technologies.map((t, idx) => (
                       <span
@@ -136,7 +138,7 @@ const PortfolioDetail = () => {
             </div>
           </div>
         </div>
-        <div className='grid grid-cols-12 gap-10 item-start w-full'>
+        <div className='grid grid-cols-12 md:gap-10 gap-4 item-start w-full'>
           <div className='lg:col-span-8 col-span-12'>
             <div className="rounded-2xl border border-white/10 bg-white/5 p-6 md:p-8">
               <h3 className="text-xl font-bold">About this project</h3>
@@ -155,54 +157,26 @@ const PortfolioDetail = () => {
                   to="/portfolio"
                   className="inline-flex justify-center px-5 py-2.5 rounded-xl font-semibold text-sm bg-white text-black hover:bg-gray-200 transition"
                 >
-                  View all portfolios
+                  View all works
                 </Link>
               </div>
             </div>
           </div>
-          <div className='lg:col-span-4 col-span-12'>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 md:p-8 space-y-4">
-              <h3 className="text-xl font-bold">Project info</h3>
 
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-400">Category</span>
-                <span className="text-gray-200 font-semibold">
-                  {portfolioDetail?.category || "-"}
-                </span>
-              </div>
-
-              <div className="flex items-center justify-between text-sm">
+          <div className='col-span-12 lg:col-span-4'>
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 md:p-8 space-y-4">
+              <h3 className="text-lg md:text-xl font-bold">Project info</h3>
+              <div className="flex justify-between text-sm">
                 <span className="text-gray-400">Tech count</span>
-                <span className="text-gray-200 font-semibold">
-                  {portfolioDetail?.technologies?.length ?? 0}
-                </span>
+                <span className="text-gray-200">{portfolioDetail?.technologies?.length ?? 0}</span>
               </div>
-
-              <div className="pt-2 border-t border-white/10 space-y-2">
-                <p className="text-sm text-gray-400">Links</p>
-                <a
-                  href={portfolioDetail?.demo_url || "#"}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`block text-sm truncate ${
-                    portfolioDetail?.demo_url
-                      ? "text-gray-200 hover:text-white"
-                      : "text-gray-500"
-                  }`}
-                >
-                  Demo: {portfolioDetail?.demo_url || "-"}
+              <div className="pt-4 border-t border-white/10 space-y-2">
+                <p className="text-xs text-gray-500 uppercase">External Links</p>
+                <a href={portfolioDetail?.demo_url} target='_blank' className="block text-xs md:text-sm truncate text-cyan-400 hover:underline">
+                  {portfolioDetail?.demo_url || "No demo URL"}
                 </a>
-                <a
-                  href={portfolioDetail?.github_url || "#"}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`block text-sm truncate ${
-                    portfolioDetail?.github_url
-                      ? "text-gray-200 hover:text-white"
-                      : "text-gray-500"
-                  }`}
-                >
-                  GitHub: {portfolioDetail?.github_url || "-"}
+                <a href={portfolioDetail?.github_url} target='_blank' className="block text-xs md:text-sm truncate text-cyan-400 hover:underline">
+                  {portfolioDetail?.github_url || "No github URL"}
                 </a>
               </div>
             </div>
