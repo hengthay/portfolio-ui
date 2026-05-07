@@ -1,8 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { FaGithubSquare } from "react-icons/fa";
 import { FaTelegramPlane } from "react-icons/fa";
-import { FaFacebookF } from "react-icons/fa";
-import { FaDiscord } from "react-icons/fa6";
+import { FaFacebookF, FaLinkedinIn  } from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
 
 const Footer = () => {
@@ -15,14 +14,16 @@ const Footer = () => {
   ];
 
   const foot = [
-    { id: 1, Icon: FaGithubSquare, url: "https://github.com/yourusername" },
-    { id: 2, Icon: FaTelegramPlane, url: "https://t.me/yourusername" },
-    { id: 3, Icon: FaFacebookF, url: "https://facebook.com/yourprofile" },
-    { id: 4, Icon: FaDiscord, url: "https://discord.gg/yourinvite" },
-    { id: 5, Icon: MdOutlineEmail, url: "mailto:youremail@gmail.com" },
+    { id: 1, Icon: FaGithubSquare, url: "https://github.com/hengthay" },
+    { id: 2, Icon: FaTelegramPlane, url: "https://t.me/pachiees" },
+    { id: 3, Icon: FaFacebookF, url: "https://web.facebook.com/kim.thai.55501" },
+    { id: 4, Icon: FaLinkedinIn, url: "https://www.linkedin.com/in/laov-kimhengthay-047a232b1/" },
+    { id: 5, Icon: MdOutlineEmail, url: "mailto:laovkimhengthay@gmail.com" },
   ];
 
   const location = useLocation();
+
+  const year = new Date().getFullYear();
 
   return (
     <footer className="w-full border-t border-slate-800 mt-20">
@@ -43,7 +44,7 @@ const Footer = () => {
         </ul>
         <div className="w-full text-white md:text-start text-center ">
           <div className="">
-            <p className="text-sm text-gray-400">&copy; 2026 Heng Thay. All rights reserved.</p>
+            <p className="text-sm text-gray-400">&copy; {year} Heng Thay. All rights reserved.</p>
           </div>
           <div className="w-full my-8">
             <ul className="flex justify-center items-center md:justify-start md:items-start md:gap-x-2 gap-x-2">

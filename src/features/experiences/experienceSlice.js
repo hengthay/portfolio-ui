@@ -19,7 +19,7 @@ export const fetchExperience = createAsyncThunk(
         return thunkAPI.rejectWithValue("Experience is not exisit!");
       }
 
-      console.log("Experiences - ", res?.data?.data);
+      // console.log("Experiences - ", res?.data?.data);
 
       return res?.data?.data ?? [];
     } catch (error) {

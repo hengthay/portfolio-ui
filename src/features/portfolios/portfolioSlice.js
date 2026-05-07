@@ -16,7 +16,7 @@ export const fetchPortfolio = createAsyncThunk(
         withCredentials: true
       });
 
-      console.log('Portfolios data: ',res?.data?.data);
+      // console.log('Portfolios data: ',res?.data?.data);
 
       if(!res?.data?.data) {
         return thunkAPI.rejectWithValue('Portfolio project not exist!');
@@ -42,7 +42,7 @@ export const fetchPortfolioDetail = createAsyncThunk(
         return thunkAPI.rejectWithValue(`Failed to get portfolio with id: ${id}`);
       }
 
-      console.log('Portfolio Detail - ', res.data.data);
+      // console.log('Portfolio Detail - ', res.data.data);
       return res?.data?.data ?? [];
     } catch (error) {
       console.log('Error to get portfolio detail - ', error);

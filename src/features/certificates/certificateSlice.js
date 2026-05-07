@@ -18,7 +18,7 @@ export const fetchCertificate = createAsyncThunk(
         return thunkAPI.rejectWithValue('Certificates is not exists!');
       }
 
-      console.log('Certificates -', res?.data?.data);
+      // console.log('Certificates -', res?.data?.data);
 
       return res?.data?.data ?? [];
     } catch (error) {

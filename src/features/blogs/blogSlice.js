@@ -18,7 +18,7 @@ export const fetchBlog = createAsyncThunk(
         return thunkAPI.rejectWithValue('Blogs is not exists!');
       }
 
-      console.log(res?.data?.data);
+      // console.log(res?.data?.data);
 
       return res?.data?.data ?? [];
     } catch (error) {

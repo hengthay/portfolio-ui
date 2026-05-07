@@ -12,3 +12,7 @@
 @theme {
   --animate-scrollX: scrollX 15s linear infinite;
 }
+
+.animate-scrollX:hover {
+  animation-play-state: paused;
+}

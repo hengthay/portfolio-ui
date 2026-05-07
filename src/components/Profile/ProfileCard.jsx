@@ -7,7 +7,7 @@ const ProfileCard = ({ profile }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, ease: "easeIn" }}
       key={profile.id}
-      className="mt-8 space-y-14"
+      className="mt-8 md:space-y-14 space-y-10"
     >
       <div className="flex gap-x-2 items-center">
         <h1 className="md:text-5xl text-3xl lg:text-6xl font-bold tracking-wide">

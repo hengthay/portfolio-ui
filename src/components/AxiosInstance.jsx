@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API = 'http://localhost:8000';
+// const API = 'http://localhost:8000';
+const API = 'https://api.laovkimhengthay.site';
 
 const API_BASE_URL = `${API}/api`;
 
@@ -9,7 +10,7 @@ const axiosInstance = axios.create({
   withCredentials: true,
   headers: {
     'Accept': 'application/json',
-    'Content-Type': 'applicatin/json'
+    'Content-Type': 'application/json'
   }
 })
 

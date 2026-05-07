@@ -18,7 +18,7 @@ export const fetchSkill = createAsyncThunk(
         return thunkAPI.rejectWithValue('Skill is not exisits!');
       }
 
-      console.log('Skills - ', res?.data?.data);
+      // console.log('Skills - ', res?.data?.data);
 
       return res?.data?.data ?? [];
     } catch (error) {

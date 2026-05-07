@@ -40,7 +40,7 @@ const PortfolioDetail = () => {
                 imageSrc ? (
                   <img 
                   src={`${import.meta.env.VITE_API_URL}/storage/${portfolioDetail?.image_url}`} 
-                  alt="" 
+                  alt={portfolioDetail?.title} 
                   className='object-cover w-full h-full rounded-2xl'
                   />
                 ) : (

@@ -14,7 +14,7 @@ export const fetchResume = createAsyncThunk(
         withCredentials: true
       });
 
-      console.log('resumes dat - ', res?.data?.data);
+      // console.log('resumes dat - ', res?.data?.data);
 
       if(!res?.data?.data) {
         return thunkAPI.rejectWithValue('Resume data is not exists');

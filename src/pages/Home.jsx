@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { FaGithubSquare } from "react-icons/fa";
 import { FaTelegramPlane } from "react-icons/fa";
-import { FaFacebookF } from "react-icons/fa";
-import { FaDiscord } from "react-icons/fa6";
+import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { GiBookAura } from "react-icons/gi";
@@ -139,11 +138,11 @@ const Home = () => {
   // console.log(error);
   // console.log(resumes);
   const foot = [
-    { id: 1, Icon: FaGithubSquare, url: "https://github.com/yourusername" },
-    { id: 2, Icon: FaTelegramPlane, url: "https://t.me/yourusername" },
-    { id: 3, Icon: FaFacebookF, url: "https://facebook.com/yourprofile" },
-    { id: 4, Icon: FaDiscord, url: "https://discord.gg/yourinvite" },
-    { id: 5, Icon: MdOutlineEmail, url: "mailto:youremail@gmail.com" },
+    { id: 1, Icon: FaGithubSquare, url: "https://github.com/hengthay" },
+    { id: 2, Icon: FaTelegramPlane, url: "https://t.me/pachiees" },
+    { id: 3, Icon: FaFacebookF, url: "https://web.facebook.com/kim.thai.55501" },
+    { id: 4, Icon: FaLinkedinIn, url: "https://www.linkedin.com/in/laov-kimhengthay-047a232b1/" },
+    { id: 5, Icon: MdOutlineEmail, url: "mailto:laovkimhengthay@gmail.com" },
   ];
 
   return (
@@ -210,7 +209,7 @@ const Home = () => {
       </motion.div>
 
       {/* Portfolio Start */}
-      <div className="w-full flex flex-col mt-25 space-y-14">
+      <div className="w-full flex flex-col md:mt-20 mt-15 space-y-14">
         <motion.div
           initial="hidden"
           whileInView="show"
@@ -234,15 +233,18 @@ const Home = () => {
             a few of my favorites.
           </motion.p>
         </motion.div>
-
-        <div className="w-full grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-14 mt-6">
-          {portfolios.length > 0 &&
-            portfolios.map((port) => (
-              <PortfolioCard port={port} key={port.id} />
-            ))}
-        </div>
+        {
+          portfolioStatus === 'succeeded' && portfolios.length > 0 && (
+            <div className="w-full grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-14 mt-6">
+              {portfolios.length > 0 &&
+                portfolios.map((port) => (
+                  <PortfolioCard port={port} key={port.id} />
+                ))}
+            </div>
+          )
+        }
         {portfolioStatus === "loading" && (
-          <div className="flex gap-x-2 justify-start items-center mt-20">
+          <div className="flex gap-x-2 justify-start items-center mt-5">
             <p className="text-gray-300 font-medium md:text-base text-sm">
               Loading
             </p>
@@ -250,7 +252,7 @@ const Home = () => {
           </div>
         )}
         {portfolioStatus === "failed" && (
-          <div className="flex gap-x-2 justify-start items-center mt-20 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
+          <div className="flex gap-x-2 justify-start items-center mt-5 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="28"
@@ -379,7 +381,7 @@ const Home = () => {
             transition={{ duration: 0.5, ease: "easeOut" }}
             className="flex items-center gap-x-4 relative"
           >
-            {/* Icon */}
+            
             <motion.div
               whileHover={{ scale: 1.06 }}
               transition={{ type: "spring", stiffness: 260, damping: 16 }}
@@ -388,13 +390,11 @@ const Home = () => {
               <GiBookAura size={26} className="text-yellow-400" />
             </motion.div>
 
-            {/* Title */}
             <h4 className="text-lg md:text-2xl font-semibold text-white tracking-wide">
               Education
             </h4>
           </motion.div>
 
-          {/* Vertical Line from Icon */}
           <motion.span
             variants={lineAnim}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
@@ -410,7 +410,7 @@ const Home = () => {
           </ul>
 
           {resumeStatus === "loading" && (
-            <div className="flex gap-x-2 justify-start items-center mt-20">
+            <div className="flex gap-x-2 justify-start items-center md:mt-20 mt-25">
               <p className="text-gray-300 font-medium md:text-base text-sm">
                 Loading
               </p>
@@ -418,7 +418,7 @@ const Home = () => {
             </div>
           )}
           {resumeStatus === "failed" && (
-            <div className="flex gap-x-2 justify-start items-center mt-20 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
+            <div className="flex gap-x-2 justify-start items-center md:mt-20 mt-25 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="28"
@@ -458,7 +458,7 @@ const Home = () => {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="flex items-center gap-x-4 relative"
         >
-          {/* Icon */}
+          
           <motion.div
             whileHover={{ scale: 1.06 }}
             transition={{ type: "spring", stiffness: 260, damping: 16 }}
@@ -467,13 +467,13 @@ const Home = () => {
             <PiBagLight size={26} className="text-yellow-400" />
           </motion.div>
 
-          {/* Title */}
+          
           <h4 className="text-lg md:text-2xl font-semibold text-white tracking-wide">
             Experiences
           </h4>
         </motion.div>
 
-        {/* Vertical Line from Icon */}
+        
         <motion.span
           variants={lineAnim}
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
@@ -488,7 +488,7 @@ const Home = () => {
             ))}
         </ul>
         {experienceStatus === "loading" && (
-          <div className="flex gap-x-2 justify-start items-center mt-20">
+          <div className="flex gap-x-2 justify-start items-center md:mt-20 mt-25">
             <p className="text-gray-300 font-medium md:text-base text-sm">
               Loading
             </p>
@@ -496,7 +496,7 @@ const Home = () => {
           </div>
         )}
         {experienceStatus === "failed" && (
-          <div className="flex gap-x-2 justify-start items-center mt-20 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
+          <div className="flex gap-x-2 justify-start items-center md:mt-20 mt-25 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="28"
@@ -534,7 +534,7 @@ const Home = () => {
           <motion.h2
             variants={allInTitle}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="md:text-4xl text-2xl lg:text-5xl font-bold tracking-wide max-w-3xl"
+            className="md:text-4xl text-2xl lg:text-5xl font-bold tracking-wide max-w-3xl mt-10"
           >
             What I am learning as a developer.
           </motion.h2>
@@ -547,10 +547,14 @@ const Home = () => {
             with, and what I learn while becoming a better developer.
           </motion.p>
         </motion.div>
-        <div className="w-full mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {blogs.length > 0 &&
-            blogs.map((blog) => <BlogCard blog={blog} key={blog.id} />)}
-        </div>
+        {
+          blogStatus === 'succeeded' && blogs.length > 0 && (
+            <div className="w-full mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+              {blogs.length > 0 &&
+                blogs.map((blog) => <BlogCard blog={blog} key={blog.id} />)}
+            </div>
+          )
+        }
         {blogStatus === "loading" && (
           <div className="flex gap-x-2 justify-start items-center mt-20">
             <p className="text-gray-300 font-medium md:text-base text-sm">
@@ -587,7 +591,7 @@ const Home = () => {
       {/* Blog end */}
 
       {/* Certicate Start */}
-      <div className="w-full md:mt-25 mt-20 space-y-14">
+      <div className="w-full md:mt-25 mt-20">
         <motion.div
           variants={sectionWrap}
           initial="hidden"
@@ -615,7 +619,7 @@ const Home = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.25 }}
-          className="relative w-full overflow-hidden"
+          className="relative w-full overflow-hidden mt-14"
         >
           <motion.div
             variants={fade}

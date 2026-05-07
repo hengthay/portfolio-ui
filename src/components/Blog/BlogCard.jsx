@@ -41,7 +41,7 @@ const BlogCard = ({ blog }) => {
 
         <div className="flex items-center justify-between pt-4 border-t border-white/10 text-sm text-gray-500">
           <span>{formatDate(blog.join_date)}</span>
-          <a href="#" target="_blank">
+          <a href="https://www.codecademy.com/catalog" target="_blank">
             <span className="text-cyan-400 group-hover:underline cursor-pointer">
               Read more →
             </span>

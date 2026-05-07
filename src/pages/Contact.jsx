@@ -16,19 +16,22 @@ const Contact = () => {
     message: "",
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const token = import.meta.env.VITE_TELEGRAM_TOKEN;
       const chatId = import.meta.env.VITE_TELEGRAM_CHATID;
       const text = `📩 *New Contact Message*%0A👤 Name: ${form.name}%0A📧 Email: ${form.email}%0A📝 Message: ${form.message}`;
 
-      axios
+      await axios
         .post(
           `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${text}&parse_mode=Markdown`
         )
@@ -51,6 +54,8 @@ const Contact = () => {
         });
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false)
     }
 
     // reset (you had subject but no subject field)
@@ -126,7 +131,7 @@ const Contact = () => {
                 onChange={handleChange}
                 required
                 className="mt-1 w-full rounded-xl bg-black/20 border border-white/10 px-4 py-3 outline-none focus:border-cyan-500"
-                placeholder="you@email.com"
+                placeholder="your-username@gmail.com"
                 type="email"
               />
             </motion.div>
@@ -153,7 +158,7 @@ const Contact = () => {
               className="flex gap-x-2 cursor-pointer px-6 rounded-xl bg-cyan-500 hover:bg-cyan-600 text-black font-semibold py-3 transition"
             >
               <PiTelegramLogoThin size={28} />
-              Send Message
+              {isLoading ? <p>Sending<span className="animate-pulse">...</span></p> : "Send Message"}
             </motion.button>
           </motion.div>
 
