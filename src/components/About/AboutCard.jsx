@@ -31,7 +31,7 @@ const AboutCard = ({ profile }) => {
         <img
           src={`${import.meta.env.VITE_API_URL}/storage/${profile.avatar_url}`}
           alt={profile.name}
-          className="sm:w-125 sm:h-auto w-75 h-auto border border-gray-300 rounded-md"
+          className="sm:w-125 sm:h-auto w-75 h-auto rounded-2xl"
         />
       </div>
     </div>
