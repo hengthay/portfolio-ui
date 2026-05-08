@@ -7,16 +7,16 @@ const PortfolioCard = ({ port }) => {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
+      whileHover={{ y: -8 }}
       viewport={{ once: true, amount: 0.3 }}
       key={port.id}
       style={{
         willChange: "transform, opacity",
-        backfaceVisibility: "hidden",
+        // Keeps the layer stable on iOS
         WebkitBackfaceVisibility: "hidden",
-        transform: "translateZ(0)",
       }}
-      className="transform-gpu group rounded-2xl border border-white/10 bg-slate-900/40 shadow-md overflow-hidden
-      transition duration-300 hover:-translate-y-2 hover:shadow-2xl"
+      className="group rounded-2xl border border-white/10 bg-slate-900/40 shadow-md overflow-hidden
+      transition-shadow duration-300 hover:shadow-2xl"
     >
       <div className="relative h-48 overflow-hidden">
         <img
@@ -30,6 +30,7 @@ const PortfolioCard = ({ port }) => {
           <a
             href={`${port.demo_url}`}
             target="_blank"
+            rel="noreferrer"
             className="px-4 py-2 text-sm rounded-xl bg-cyan-600 text-white hover:bg-cyan-500"
           >
             Live Demo
@@ -37,6 +38,7 @@ const PortfolioCard = ({ port }) => {
           <a
             href={`${port.github_url}`}
             target="_blank"
+            rel="noreferrer"
             className="px-4 py-2 text-sm rounded-xl bg-slate-800 text-white border border-white/20 hover:bg-slate-700"
           >
             GitHub

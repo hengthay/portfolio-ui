@@ -110,6 +110,7 @@ const Project = () => {
                     <a
                       href={`${port.demo_url}`}
                       target="_blank"
+                      rel="noreferrer"
                       className="px-4 py-2 text-sm rounded-xl bg-cyan-600 text-white hover:bg-cyan-500"
                     >
                       Live Demo
@@ -117,6 +118,7 @@ const Project = () => {
                     <a
                       href={`${port.github_url}`}
                       target="_blank"
+                      rel="noreferrer"
                       className="px-4 py-2 text-sm rounded-xl bg-slate-800 text-white border border-white/20 hover:bg-slate-700"
                     >
                       GitHub

@@ -4,24 +4,24 @@ import { motion } from "framer-motion";
 const BlogCard = ({ blog }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50, }}
+      initial={{ opacity: 0, y: 30, }}
       whileInView={{ opacity: 1, y: 0}}
       transition={{ duration: 0.6, ease: "easeOut" }}
+      whileHover={{ y: -8 }}
       viewport={{ once: true, amount: 0.3 }}
       style={{
         willChange: "transform, opacity",
-        backfaceVisibility: "hidden",
+        // Keeps the layer stable on iOS
         WebkitBackfaceVisibility: "hidden",
-        transform: "translateZ(0)",
       }}
-      className="transform-gpu group rounded-2xl overflow-hidden bg-[#0f172a] border border-white/10 hover:border-cyan-500/50 transition-all duration-300"
+      className="group rounded-2xl overflow-hidden bg-[#0f172a] border border-white/10 hover:border-cyan-500/50 transition-all duration-300"
       key={blog.id}
     >
       <div className="overflow-hidden">
         <img
           src={`${import.meta.env.VITE_API_URL}/storage/${blog.cover_image}`}
           alt={blog.title}
-          className="w-full h-52 object-cover group-hover:scale-110 transition-transform duration-500"
+          className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-500"
         />
       </div>
 
@@ -47,7 +47,7 @@ const BlogCard = ({ blog }) => {
 
         <div className="flex items-center justify-between pt-4 border-t border-white/10 text-sm text-gray-500">
           <span>{formatDate(blog.join_date)}</span>
-          <a href="https://www.codecademy.com/catalog" target="_blank">
+          <a rel="noreferrer" href="https://www.codecademy.com/catalog" target="_blank">
             <span className="text-cyan-400 group-hover:underline cursor-pointer">
               Read more →
             </span>
