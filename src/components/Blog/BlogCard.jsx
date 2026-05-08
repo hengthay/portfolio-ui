@@ -14,7 +14,7 @@ const BlogCard = ({ blog }) => {
         // Keeps the layer stable on iOS
         WebkitBackfaceVisibility: "hidden",
       }}
-      className="group rounded-2xl overflow-hidden bg-[#0f172a] border border-white/10 hover:border-cyan-500/50 transition-all duration-300"
+      className="group rounded-2xl overflow-hidden bg-[#0f172a] border border-white/10 hover:border-cyan-500/50 transition-colors duration-300"
       key={blog.id}
     >
       <div className="overflow-hidden">
