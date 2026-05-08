@@ -6,7 +6,7 @@ const PortfolioCard = ({ port }) => {
     <motion.div
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: "easeIn" }}
+      transition={{ duration: 0.5, ease: "easeIn" }}
       viewport={{ once: true, amount: 0.3 }}
       key={port.id}
       className="group rounded-2xl border border-white/10 bg-slate-900/40 shadow-md overflow-hidden

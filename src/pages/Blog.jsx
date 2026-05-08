@@ -33,7 +33,7 @@ const Blog = () => {
   }, [blogStatus, dispatch]);
 
   return (
-    <div className="md:p-20 p-6 w-full mx-auto flex flex-col max-w-7xl max-sm:w-100">
+    <div className="md:p-20 p-6 w-full mx-auto flex flex-col max-w-7xl">
       <div className="w-full md:mt-20 mt-15">
         <div className="md:space-y-12 space-y-8">
           <motion.h2

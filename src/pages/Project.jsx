@@ -40,8 +40,8 @@ const Project = () => {
   });
 
   return (
-    <div className="md:p-20 p-6 w-full mx-auto flex flex-col max-w-7xl max-sm:w-100">
-      <div className="w-full flex flex-col mt-25 space-y-14">
+    <div className="md:p-20 p-6 w-full mx-auto flex flex-col max-w-7xl">
+      <div className="w-full flex flex-col md:mt-20 mt-15 space-y-14">
         <div className="md:space-y-12 space-y-8">
           <motion.h2
             variants={allInTitle}
@@ -68,7 +68,7 @@ const Project = () => {
           initial={{ opacity: 0, x: 200 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, ease: "easeIn" }}
-          className="w-full flex flex-wrap justify-start items-center gap-4"
+          className="w-full flex flex-wrap justify-start items-center md:gap-4 gap-2"
         >
           {portfoliosType.map((type, index) => (
             <span
@@ -84,7 +84,7 @@ const Project = () => {
           initial="hidden"
           animate="show"
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="w-full grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-14 mt-6"
+          className="w-full grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-14 gap-7 mt-6"
         >
           {portfolios.length > 0 &&
             filteredPortfolio.map((port) => (

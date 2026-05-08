@@ -137,6 +137,7 @@ const Home = () => {
   // console.log(status);
   // console.log(error);
   // console.log(resumes);
+  // console.log(certificates);
   const foot = [
     { id: 1, Icon: FaGithubSquare, url: "https://github.com/hengthay" },
     { id: 2, Icon: FaTelegramPlane, url: "https://t.me/pachiees" },
@@ -624,15 +625,26 @@ const Home = () => {
           <motion.div
             variants={fade}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="w-full flex animate-scrollX"
+            className="w-max flex animate-scrollX shrink-0"
           >
+            {/* Render twice for seamless loop */}
             {certificates.length > 0 &&
               certificates.map((certificate) => (
                 <CertificateCard
                   certificate={certificate}
-                  key={certificate.id}
+                  key={`original-${certificate.id}`}
                 />
-              ))}
+              ))
+            }
+
+            {certificates.length > 0 &&
+              certificates.map((certificate) => (
+                <CertificateCard
+                  certificate={certificate}
+                  key={`duplicate-${certificate.id}`}
+                />
+              ))
+            }
           </motion.div>
         </motion.div>
         {certificateStatus === "loading" && (

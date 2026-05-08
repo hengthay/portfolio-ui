@@ -10,7 +10,7 @@
 }
 
 @theme {
-  --animate-scrollX: scrollX 15s linear infinite;
+  --animate-scrollX: scrollX 40s linear infinite;
 }
 
 .animate-scrollX:hover {

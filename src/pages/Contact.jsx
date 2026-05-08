@@ -67,10 +67,10 @@ const Contact = () => {
       initial="hidden"
       animate="show"
       variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
-      className="md:p-20 p-6 w-full mx-auto flex flex-col max-w-5xl max-sm:w-100"
+      className="md:p-20 p-6 w-full mx-auto flex flex-col max-w-5xl"
     >
       {/* Header */}
-      <motion.div variants={fadeUp} transition={{ duration: 0.5, ease: "easeOut" }} className="mb-10">
+      <motion.div variants={fadeUp} transition={{ duration: 0.5, ease: "easeOut" }} className="mb-10 md:mt-15 mt-10">
         <h1 className="text-3xl md:text-4xl font-semibold">Contact</h1>
         <p className="text-gray-400 mt-2">Send me a message or find me on the map.</p>
       </motion.div>
@@ -98,7 +98,6 @@ const Contact = () => {
         </div>
       </motion.div>
 
-      {/* Form */}
       <motion.div variants={fadeUp} transition={{ duration: 0.55, ease: "easeOut" }} className="w-full">
         <h2 className="text-lg font-semibold mb-4">Send a Message</h2>
 

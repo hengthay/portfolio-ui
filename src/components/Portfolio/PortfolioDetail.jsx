@@ -100,7 +100,7 @@ const PortfolioDetail = () => {
                 </button>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:gap-4 gap-2">
                 <div className="rounded-xl border border-white/10 bg-black/20 p-4">
                   <p className="text-xs text-gray-400">Created</p>
                   <p className="mt-1 text-sm text-gray-200">

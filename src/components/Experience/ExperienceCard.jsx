@@ -19,7 +19,7 @@ const ExperienceCard = ({ experience }) => {
         transition={{ type: "spring", stiffness: 300, damping: 18 }}
         className="absolute left-4.25 top-1 w-3 h-3 rounded-full bg-cyan-400 before:content-[''] before:ring-4 before:ring-cyan-400/30 before:absolute before:top-0 before:rounded-full before:left-0 before:w-3 before:h-3 before:animate-ping"
       ></motion.span>
-      <div className="flex justify-between items-center">
+      <div className="flex flex-wrap justify-between items-center">
         <h4 className="text-base font-semibold leading-relaxed tracking-wide">
           {experience.position}
         </h4>

@@ -46,8 +46,8 @@ const Education = () => {
   }, [resumeStatus, experienceStatus, dispatch]);
 
   return (
-    <div className="md:p-20 p-6 w-full mx-auto flex flex-col max-w-7xl max-sm:w-100">
-      <div className="w-full md:mt-20 mt-15 space-y-14">
+    <div className="md:p-20 p-4 w-full mx-auto flex flex-col max-w-7xl">
+      <div className="w-full md:mt-20 mt-15 md:space-y-14 space-y-7">
         <motion.div
           initial="hidden"
           animate="show"
@@ -78,7 +78,7 @@ const Education = () => {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="w-full mt-10 relative"
         >
-          <div className="flex items-center gap-x-4 relative">
+          <div className="flex items-center md:gap-x-4 gap-x-2 relative">
             {/* Icon */}
             <div className="relative z-10 p-3 rounded-2xl bg-slate-900 border border-yellow-400/40">
               <GiBookAura size={26} className="text-yellow-400" />
@@ -144,7 +144,7 @@ const Education = () => {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="w-full mt-20 relative"
       >
-        <div className="flex items-center gap-x-4 relative">
+        <div className="flex items-center md:gap-x-4 gap-x-2 relative">
           {/* Icon */}
           <div className="relative z-10 p-3 rounded-2xl bg-slate-900 border border-yellow-400/40">
             <PiBagLight size={26} className="text-yellow-400" />
