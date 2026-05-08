@@ -4,12 +4,18 @@ import { Link } from "react-router-dom";
 const PortfolioCard = ({ port }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: "easeIn" }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.3 }}
       key={port.id}
-      className="group rounded-2xl border border-white/10 bg-slate-900/40 shadow-md overflow-hidden
+      style={{
+        willChange: "transform, opacity",
+        backfaceVisibility: "hidden",
+        WebkitBackfaceVisibility: "hidden",
+        transform: "translateZ(0)",
+      }}
+      className="transform-gpu group rounded-2xl border border-white/10 bg-slate-900/40 shadow-md overflow-hidden
       transition duration-300 hover:-translate-y-2 hover:shadow-2xl"
     >
       <div className="relative h-48 overflow-hidden">

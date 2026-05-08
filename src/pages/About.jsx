@@ -38,6 +38,7 @@ const About = () => {
             key={profile.id}
             variants={fadeUp}
             transition={{ duration: 0.55, ease: "easeOut" }}
+            className="transform-gpu"
           >
             <AboutCard profile={profile} />
           </motion.div>

@@ -6,9 +6,15 @@ const BlogCard = ({ blog }) => {
     <motion.div
       initial={{ opacity: 0, y: 50, }}
       whileInView={{ opacity: 1, y: 0}}
-      transition={{ duration: 0.5, ease: "easeIn" }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.3 }}
-      className="group rounded-2xl overflow-hidden bg-[#0f172a] border border-white/10 hover:border-cyan-500/50 transition-all duration-300"
+      style={{
+        willChange: "transform, opacity",
+        backfaceVisibility: "hidden",
+        WebkitBackfaceVisibility: "hidden",
+        transform: "translateZ(0)",
+      }}
+      className="transform-gpu group rounded-2xl overflow-hidden bg-[#0f172a] border border-white/10 hover:border-cyan-500/50 transition-all duration-300"
       key={blog.id}
     >
       <div className="overflow-hidden">
