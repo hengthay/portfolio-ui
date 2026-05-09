@@ -6,7 +6,7 @@ const AboutCard = ({ profile }) => {
       className="w-full grid sm:grid-cols-2 gap-10 grid-cols-1 sm:my-10"
       key={profile.id}
     >
-      <div className="space-y-14 md:order-1 order-2">
+      <div className="md:space-y-8 space-y-6 md:order-1 order-2">
         <h2 className="md:text-5xl text-3xl lg:text-6xl font-bold tracking-wide max-w-xl">
           I'm {profile.name}, {profile.introduce}
         </h2>

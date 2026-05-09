@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const PortfolioCard = ({ port }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       whileHover={{ y: -8 }}

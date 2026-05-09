@@ -16,6 +16,8 @@ import {
   selectExperienceStatus,
 } from "../features/experiences/experienceSlice";
 import { motion } from "framer-motion";
+import ResumeSkeleton from "../components/Skeleton-Loading/ResumeSkeleton";
+import ExperienceSkeleton from "../components/Skeleton-Loading/ExperienceSkeleton";
 
 const allInTitle = {
   hidden: { opacity: 0, y: -50 },
@@ -48,6 +50,7 @@ const Education = () => {
   return (
     <div className="md:p-20 p-4 w-full mx-auto flex flex-col max-w-7xl">
       <div className="w-full md:mt-20 mt-15 md:space-y-14 space-y-7">
+
         <motion.div
           initial="hidden"
           animate="show"
@@ -70,6 +73,7 @@ const Education = () => {
             accomplished so far.
           </motion.p>
         </motion.div>
+
         <motion.div
           variants={fadeIn}
           initial="hidden"
@@ -95,21 +99,21 @@ const Education = () => {
             className={`absolute left-5.5 top-14 w-0.5 bg-gray-400/60 ${resumeStatus === "failed" || resumeStatus === "loading" ? "h-15" : "h-full"}`}
           ></span>
 
-          <ul className="mt-10 space-y-10 relative">
-            {resumes.length > 0 &&
-              resumes.map((resume) => (
-                <ResumeCard resume={resume} key={resume.id} />
-              ))}
-          </ul>
+          {
+            resumeStatus === 'succeeded' && resumes.length > 0 && (
+              <ul className="mt-10 space-y-10 relative">
+                {resumes.length > 0 &&
+                  resumes.map((resume) => (
+                    <ResumeCard resume={resume} key={resume.id} />
+                  ))}
+              </ul>
+            )
+          }
 
           {resumeStatus === "loading" && (
-            <div className="flex gap-x-2 justify-start items-center mt-20">
-              <p className="text-gray-300 font-medium md:text-base text-sm">
-                Loading
-              </p>
-              <p className="w-8 h-8 rounded-full border-2 border-t-transparent border-gray-400 animate-spin"></p>
-            </div>
+            <ResumeSkeleton />
           )}
+
           {resumeStatus === "failed" && (
             <div className="flex gap-x-2 justify-start items-center mt-20 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
               <svg
@@ -134,8 +138,11 @@ const Education = () => {
               </p>
             </div>
           )}
+
         </motion.div>
+
       </div>
+
       <motion.div
         variants={fadeIn}
         initial="hidden"
@@ -160,21 +167,22 @@ const Education = () => {
         <span
           className={`absolute left-5.5 top-14 w-0.5 bg-gray-400/60 ${experienceStatus === "failed" || experienceStatus === "loading" ? "h-15" : "h-full"}`}
         ></span>
+        
+        {
+          experienceStatus === 'succeeded' && experiences.length > 0 && (
+            <ul className="mt-10 space-y-10 relative">
+              {experiences.length > 0 &&
+                experiences.map((experience) => (
+                  <ExperienceCard experience={experience} key={experience.id} />
+                ))}
+            </ul>
+          )
+        }
 
-        <ul className="mt-10 space-y-10 relative">
-          {experiences.length > 0 &&
-            experiences.map((experience) => (
-              <ExperienceCard experience={experience} key={experience.id} />
-            ))}
-        </ul>
         {experienceStatus === "loading" && (
-          <div className="flex gap-x-2 justify-start items-center mt-20">
-            <p className="text-gray-300 font-medium md:text-base text-sm">
-              Loading
-            </p>
-            <p className="w-8 h-8 rounded-full border-2 border-t-transparent border-gray-400 animate-spin"></p>
-          </div>
+          <ExperienceSkeleton />
         )}
+
         {experienceStatus === "failed" && (
           <div className="flex gap-x-2 justify-start items-center mt-20 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
             <svg
@@ -199,6 +207,7 @@ const Education = () => {
             </p>
           </div>
         )}
+
       </motion.div>
     </div>
   );

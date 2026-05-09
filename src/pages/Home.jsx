@@ -49,6 +49,15 @@ import {
 } from "../features/experiences/experienceSlice";
 import ExperienceCard from "../components/Experience/ExperienceCard";
 import { motion } from "framer-motion";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import ProfileCardSkeleton from "../components/Skeleton-Loading/ProfileCardSkeleton";
+import PortfolioSkeleton from "../components/Skeleton-Loading/PortfolioSkeleton";
+import SkillSkeleton from "../components/Skeleton-Loading/SkillSkeleton";
+import ResumeSkeleton from "../components/Skeleton-Loading/ResumeSkeleton";
+import ExperienceSkeleton from "../components/Skeleton-Loading/ExperienceSkeleton";
+import BlogSkeleton from "../components/Skeleton-Loading/BlogSkeleton";
+import CertificateSkeleton from "../components/Skeleton-Loading/CertificateSkeleton";
 
 const allInTitle = {
   hidden: { opacity: 0, y: -50 },
@@ -156,12 +165,7 @@ const Home = () => {
           ))}
 
         {status === "loading" && (
-          <div className="flex gap-x-2 justify-start items-center mt-20">
-            <p className="text-gray-300 font-medium md:text-base text-sm">
-              Loading
-            </p>
-            <p className="w-8 h-8 rounded-full border-2 border-t-transparent border-gray-400 animate-spin"></p>
-          </div>
+          <ProfileCardSkeleton />
         )}
         {status === "failed" && (
           <div className="flex gap-x-2 justify-start items-center mt-20 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
@@ -227,7 +231,7 @@ const Home = () => {
           <motion.p
             variants={allInSubTitle}
             transition={{ duration: 0.5, ease: "easeIn" }}
-            className="max-w-2xl text-base text-gray-400 tracking-wide leading-relaxed"
+            className="max-w-xl text-base text-gray-400 tracking-wide leading-relaxed"
           >
             I've worked on a variety of projects, from simple websites to
             complex web applications. And many of them are open-source. Here are
@@ -245,12 +249,7 @@ const Home = () => {
           )
         }
         {portfolioStatus === "loading" && (
-          <div className="flex gap-x-2 justify-start items-center mt-5">
-            <p className="text-gray-300 font-medium md:text-base text-sm">
-              Loading
-            </p>
-            <p className="w-8 h-8 rounded-full border-2 border-t-transparent border-gray-400 animate-spin"></p>
-          </div>
+          <PortfolioSkeleton />
         )}
         {portfolioStatus === "failed" && (
           <div className="flex gap-x-2 justify-start items-center mt-5 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
@@ -304,18 +303,17 @@ const Home = () => {
             practice.
           </motion.p>
         </motion.div>
-
-        <div className="w-full space-y-4">
-          {skills.length > 0 &&
-            skills.map((skill) => <SkillCard skill={skill} key={skill.id} />)}
-        </div>
+        {
+          skillStatus === 'succeeded' && skills.length > 0 && (
+            <div className="w-full space-y-4">
+              {skills.length > 0 &&
+                skills.map((skill) => <SkillCard skill={skill} key={skill.id} />
+              )}
+            </div>
+          )
+        }
         {skillStatus === "loading" && (
-          <div className="flex gap-x-2 justify-start items-center mt-20">
-            <p className="text-gray-300 font-medium md:text-base text-sm">
-              Loading
-            </p>
-            <p className="w-8 h-8 rounded-full border-2 border-t-transparent border-gray-400 animate-spin"></p>
-          </div>
+          <SkillSkeleton />
         )}
         {skillStatus === "failed" && (
           <div className="flex gap-x-2 justify-start items-center mt-20 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
@@ -403,20 +401,19 @@ const Home = () => {
             className={`absolute left-5.5 top-14 w-0.5 bg-gray-400/60 ${resumeStatus === "failed" || resumeStatus === "loading" ? "h-15" : "h-full"}`}
           ></motion.span>
 
-          <ul className="mt-10 space-y-10 relative">
-            {resumes.length > 0 &&
-              resumes.map((resume) => (
-                <ResumeCard resume={resume} key={resume.id} />
-              ))}
-          </ul>
+          {
+            resumeStatus === 'succeeded' && resumes.length > 0 && (
+              <ul className="mt-10 space-y-10 relative">
+                {resumes.length > 0 &&
+                  resumes.map((resume) => (
+                    <ResumeCard resume={resume} key={resume.id} />
+                  ))}
+              </ul>
+            )
+          }
 
           {resumeStatus === "loading" && (
-            <div className="flex gap-x-2 justify-start items-center md:mt-20 mt-25">
-              <p className="text-gray-300 font-medium md:text-base text-sm">
-                Loading
-              </p>
-              <p className="w-8 h-8 rounded-full border-2 border-t-transparent border-gray-400 animate-spin"></p>
-            </div>
+            <ResumeSkeleton />
           )}
           {resumeStatus === "failed" && (
             <div className="flex gap-x-2 justify-start items-center md:mt-20 mt-25 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
@@ -473,7 +470,6 @@ const Home = () => {
             Experiences
           </h4>
         </motion.div>
-
         
         <motion.span
           variants={lineAnim}
@@ -482,20 +478,21 @@ const Home = () => {
           className={`absolute left-5.5 top-14 w-0.5 bg-gray-400/60 ${experienceStatus === "failed" || experienceStatus === "loading" ? "h-15" : "h-full"}`}
         ></motion.span>
 
-        <ul className="mt-10 space-y-10 relative">
-          {experiences.length > 0 &&
-            experiences.map((experience) => (
-              <ExperienceCard experience={experience} key={experience.id} />
-            ))}
-        </ul>
+        {
+          experienceStatus === 'succeeded' && experiences.length > 0 && (
+            <ul className="mt-10 space-y-10 relative">
+              {experiences.length > 0 &&
+                experiences.map((experience) => (
+                  <ExperienceCard experience={experience} key={experience.id} />
+                ))}
+            </ul>
+          )
+        }
+
         {experienceStatus === "loading" && (
-          <div className="flex gap-x-2 justify-start items-center md:mt-20 mt-25">
-            <p className="text-gray-300 font-medium md:text-base text-sm">
-              Loading
-            </p>
-            <p className="w-8 h-8 rounded-full border-2 border-t-transparent border-gray-400 animate-spin"></p>
-          </div>
+          <ExperienceSkeleton />
         )}
+        
         {experienceStatus === "failed" && (
           <div className="flex gap-x-2 justify-start items-center md:mt-20 mt-25 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
             <svg
@@ -548,6 +545,7 @@ const Home = () => {
             with, and what I learn while becoming a better developer.
           </motion.p>
         </motion.div>
+
         {
           blogStatus === 'succeeded' && blogs.length > 0 && (
             <div className="w-full mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
@@ -556,14 +554,11 @@ const Home = () => {
             </div>
           )
         }
+
         {blogStatus === "loading" && (
-          <div className="flex gap-x-2 justify-start items-center mt-20">
-            <p className="text-gray-300 font-medium md:text-base text-sm">
-              Loading
-            </p>
-            <p className="w-8 h-8 rounded-full border-2 border-t-transparent border-gray-400 animate-spin"></p>
-          </div>
+          <BlogSkeleton />
         )}
+        
         {blogStatus === "failed" && (
           <div className="flex gap-x-2 justify-start items-center mt-20 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
             <svg
@@ -616,45 +611,47 @@ const Home = () => {
             professional development.
           </motion.p>
         </motion.div>
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.25 }}
-          className="relative w-full overflow-hidden mt-14"
-        >
-          <motion.div
-            variants={fade}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="w-max flex animate-scrollX shrink-0"
-          >
-            {/* Render twice for seamless loop */}
-            {certificates.length > 0 &&
-              certificates.map((certificate) => (
-                <CertificateCard
-                  certificate={certificate}
-                  key={`original-${certificate.id}`}
-                />
-              ))
-            }
 
-            {certificates.length > 0 &&
-              certificates.map((certificate) => (
-                <CertificateCard
-                  certificate={certificate}
-                  key={`duplicate-${certificate.id}`}
-                />
-              ))
-            }
-          </motion.div>
-        </motion.div>
+        {
+          certificateStatus === 'succeeded' && certificates.length > 0 && (
+            <motion.div
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.25 }}
+              className="relative w-full overflow-hidden mt-14"
+            >
+              <motion.div
+                variants={fade}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="w-max flex animate-scrollX shrink-0"
+              >
+                {/* Render twice for seamless loop */}
+                {certificates.length > 0 &&
+                  certificates.map((certificate) => (
+                    <CertificateCard
+                      certificate={certificate}
+                      key={`original-${certificate.id}`}
+                    />
+                  ))
+                }
+
+                {certificates.length > 0 &&
+                  certificates.map((certificate) => (
+                    <CertificateCard
+                      certificate={certificate}
+                      key={`duplicate-${certificate.id}`}
+                    />
+                  ))
+                }
+              </motion.div>
+            </motion.div>
+          )
+        }
+
         {certificateStatus === "loading" && (
-          <div className="flex gap-x-2 justify-start items-center mt-20">
-            <p className="text-gray-300 font-medium md:text-base text-sm">
-              Loading
-            </p>
-            <p className="w-8 h-8 rounded-full border-2 border-t-transparent border-gray-400 animate-spin"></p>
-          </div>
+          <CertificateSkeleton />
         )}
+
         {certificateStatus === "failed" && (
           <div className="flex gap-x-2 justify-start items-center mt-20 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
             <svg

@@ -7,6 +7,7 @@ import {
   selectProfileStatus,
 } from "../features/profiles/profileSlice";
 import AboutCard from "../components/About/AboutCard";
+import AboutSkeleton from "../components/Skeleton-Loading/AboutSkeleton";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 18 },
@@ -30,31 +31,24 @@ const About = () => {
         hidden: {},
         show: { transition: { staggerChildren: 0.12 } },
       }}
-      className="md:p-20 p-6 w-full mx-auto flex flex-col max-w-7xl max-sm:w-100"
+      className="md:p-20 p-6 w-full mx-auto flex flex-col max-w-7xl "
     >
-      {profiles.length > 0 &&
-        profiles.map((profile) => (
-          <motion.div
-            key={profile.id}
-            variants={fadeUp}
-            transition={{ duration: 0.55, ease: "easeOut" }}
-            className="transform-gpu"
-          >
-            <AboutCard profile={profile} />
-          </motion.div>
-        ))}
+      {
+        profileStatus === 'succeeded' && profiles.length > 0 &&
+          profiles.map((profile) => (
+            <motion.div
+              key={profile.id}
+              variants={fadeUp}
+              transition={{ duration: 0.55, ease: "easeOut" }}
+              className="transform-gpu"
+            >
+              <AboutCard profile={profile} />
+            </motion.div>
+          ))
+      }
 
       {profileStatus === "loading" && (
-        <motion.div
-          variants={fadeUp}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-          className="flex gap-x-2 justify-start items-center mt-20"
-        >
-          <p className="text-gray-300 font-medium md:text-base text-sm">
-            Loading
-          </p>
-          <p className="w-8 h-8 rounded-full border-2 border-t-transparent border-gray-400 animate-spin"></p>
-        </motion.div>
+        <AboutSkeleton />
       )}
 
       {profileStatus === "failed" && (

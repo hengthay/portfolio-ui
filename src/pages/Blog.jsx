@@ -7,6 +7,7 @@ import {
 } from "../features/blogs/blogSlice";
 import formatDate from "../helper/formatDate";
 import { motion } from "framer-motion";
+import BlogSkeleton from "../components/Skeleton-Loading/BlogSkeleton";
 
 const allInTitle = {
   hidden: { opacity: 0, y: -50 },
@@ -56,70 +57,72 @@ const Blog = () => {
             with, and what I learn while becoming a better developer.
           </motion.p>
         </div>
-        <motion.div
-          initial="hidden"
-          animate="show"
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="w-full mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3"
-        >
-          {blogs.length > 0 &&
-            blogs.map((blog) => (
-              <motion.div
-                variants={reveal}
-                transition={{ duration: 0.7, ease: "easeInOut" }}
-                className="group rounded-2xl overflow-hidden bg-[#0f172a] border border-white/10 hover:border-cyan-500/50 transition-all duration-300"
-                key={blog.id}
-              >
-                <div className="overflow-hidden">
-                  <img
-                    src={`${import.meta.env.VITE_API_URL}/storage/${
-                      blog.cover_image
-                    }`}
-                    alt={blog.title}
-                    className="w-full h-52 object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                </div>
 
-                <div className="p-6 space-y-4">
-                  <div className="flex flex-wrap gap-2">
-                    {blog.tags.map((b, index) => (
-                      <span
-                        key={index}
-                        className="text-xs px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
-                      >
-                        #{b}
-                      </span>
-                    ))}
-                  </div>
+        {
+          blogStatus === 'succeeded' && blogs.length > 0 && (
+            <motion.div
+              initial="hidden"
+              animate="show"
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="w-full mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3"
+            >
+              {blogs.length > 0 &&
+                blogs.map((blog) => (
+                  <motion.div
+                    variants={reveal}
+                    transition={{ duration: 0.7, ease: "easeInOut" }}
+                    className="group rounded-2xl overflow-hidden bg-[#0f172a] border border-white/10 hover:border-cyan-500/50 transition-all duration-300"
+                    key={blog.id}
+                  >
+                    <div className="overflow-hidden">
+                      <img
+                        src={`${import.meta.env.VITE_API_URL}/storage/${
+                          blog.cover_image
+                        }`}
+                        alt={blog.title}
+                        className="w-full h-52 object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                    </div>
 
-                  <h3 className="text-xl font-semibold tracking-wide text-white group-hover:text-cyan-400 transition">
-                    {blog.title}
-                  </h3>
+                    <div className="p-6 space-y-4">
+                      <div className="flex flex-wrap gap-2">
+                        {blog.tags.map((b, index) => (
+                          <span
+                            key={index}
+                            className="text-xs px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
+                          >
+                            #{b}
+                          </span>
+                        ))}
+                      </div>
 
-                  <p className="text-gray-400 text-sm leading-relaxed line-clamp-3">
-                    {blog.content}
-                  </p>
+                      <h3 className="text-xl font-semibold tracking-wide text-white group-hover:text-cyan-400 transition">
+                        {blog.title}
+                      </h3>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-white/10 text-sm text-gray-500">
-                    <span>{formatDate(blog.join_date)}</span>
-                    <a rel="noreferrer" href="https://www.codecademy.com/catalog" target="_blank">
-                      <span className="text-cyan-400 group-hover:underline cursor-pointer">
-                        Read more →
-                      </span>
-                    </a>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-        </motion.div>
+                      <p className="text-gray-400 text-sm leading-relaxed line-clamp-3">
+                        {blog.content}
+                      </p>
+
+                      <div className="flex items-center justify-between pt-4 border-t border-white/10 text-sm text-gray-500">
+                        <span>{formatDate(blog.join_date)}</span>
+                        <a rel="noreferrer" href="https://www.codecademy.com/catalog" target="_blank">
+                          <span className="text-cyan-400 group-hover:underline cursor-pointer">
+                            Read more →
+                          </span>
+                        </a>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+            </motion.div>
+          )
+        }
+
         {blogStatus === "loading" && (
-          <div className="flex gap-x-2 justify-start items-center mt-20">
-            <p className="text-gray-300 font-medium md:text-base text-sm">
-              Loading
-            </p>
-            <p className="w-8 h-8 rounded-full border-2 border-t-transparent border-gray-400 animate-spin"></p>
-          </div>
+          <BlogSkeleton />
         )}
+
         {blogStatus === "failed" && (
           <div className="flex gap-x-2 justify-start items-center mt-20 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
             <svg
@@ -144,6 +147,7 @@ const Blog = () => {
             </p>
           </div>
         )}
+        
       </div>
     </div>
   );
