@@ -13,7 +13,16 @@ const PortfolioDetail = () => {
 
   useEffect(() => {
     if (id) dispatch(fetchPortfolioDetail(id));
-  }, [id]) 
+  }, [id]);
+
+  // To force browser to display at very top view
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }, 0);
+
+    return () => clearTimeout(timeoutId);
+  }, [id]);
 
   const imageSrc = portfolioDetail?.image_url ? `${import.meta.env.VITE_API_URL}/storage/${portfolioDetail?.image_url}` : "";
 
