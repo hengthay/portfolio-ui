@@ -10,7 +10,6 @@ const SkillCard = ({ skill }) => {
     >
       <div className="flex justify-between text-sm text-gray-400 space-y-2">
         <span className="text-gray-400">{skill.name}</span>
-        <span className="text-yellow-400 font-semibold">{skill.level}%</span>
       </div>
 
       {/* Ruler line */}

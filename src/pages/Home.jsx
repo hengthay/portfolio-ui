@@ -15,25 +15,31 @@ import {
 import {
   fetchPortfolio,
   selectPortfolio,
+  selectPortfolioError,
+  selectPortfolioStatus,
 } from "../features/portfolios/portfolioSlice";
 import {
   fetchResume,
   selectResume,
+  selectResumeError,
   selectResumeStatus,
 } from "../features/resumes/resumeSlice";
 import {
   fetchBlog,
   selectBlogs,
+  selectBlogsError,
   selectBlogsStatus,
 } from "../features/blogs/blogSlice";
 import {
   fetchSkill,
   selectSkills,
+  selectSkillsError,
   selectSkillsStatus,
 } from "../features/skills/skillSlice";
 import {
   fetchCertificate,
   selectCertificate,
+  selectCertificateError,
   selectCertificateStatus,
 } from "../features/certificates/certificateSlice";
 import ProfileCard from "../components/Profile/ProfileCard";
@@ -45,6 +51,7 @@ import CertificateCard from "../components/Certificate/CertificateCard";
 import {
   fetchExperience,
   selectExperience,
+  selectExperienceError,
   selectExperienceStatus,
 } from "../features/experiences/experienceSlice";
 import ExperienceCard from "../components/Experience/ExperienceCard";
@@ -59,6 +66,7 @@ import ExperienceSkeleton from "../components/Skeleton-Loading/ExperienceSkeleto
 import BlogSkeleton from "../components/Skeleton-Loading/BlogSkeleton";
 import CertificateSkeleton from "../components/Skeleton-Loading/CertificateSkeleton";
 import { Helmet } from "react-helmet-async";
+import ErrorMessage from "../helper/ErrorMessage";
 
 const allInTitle = {
   hidden: { opacity: 0, y: -50 },
@@ -96,22 +104,30 @@ const fade = {
 };
 
 const Home = () => {
+
   const profiles = useSelector(selectProfile);
   const status = useSelector(selectProfileStatus);
   const error = useSelector(selectProfileError);
   const portfolios = useSelector(selectPortfolio);
-  const portfolioStatus = useSelector(selectProfileStatus);
+  const portfolioStatus = useSelector(selectPortfolioStatus);
+  const portfolioErrorMessage = useSelector(selectPortfolioError);
   const resumes = useSelector(selectResume);
   const resumeStatus = useSelector(selectResumeStatus);
+  const resumeErrorMessage = useSelector(selectResumeError);
   const blogs = useSelector(selectBlogs);
   const blogStatus = useSelector(selectBlogsStatus);
+  const blogErrorMessage = useSelector(selectBlogsError);
   const skills = useSelector(selectSkills);
   const skillStatus = useSelector(selectSkillsStatus);
+  const skillErrorMessage = useSelector(selectSkillsError);
   const certificates = useSelector(selectCertificate);
   const certificateStatus = useSelector(selectCertificateStatus);
+  const certificateErrorMessage = useSelector(selectCertificateError);
   const experiences = useSelector(selectExperience);
   const experienceStatus = useSelector(selectExperienceStatus);
+  const experienceErrorMessage = useSelector(selectExperienceError);
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     try {
@@ -142,12 +158,6 @@ const Home = () => {
     dispatch,
   ]);
 
-  // console.log(portfolios);
-  // console.log(profiles);
-  // console.log(status);
-  // console.log(error);
-  // console.log(resumes);
-  // console.log(certificates);
   const foot = [
     { id: 1, Icon: FaGithubSquare, url: "https://github.com/hengthay" },
     { id: 2, Icon: FaTelegramPlane, url: "https://t.me/pachiees" },
@@ -177,29 +187,9 @@ const Home = () => {
           {status === "loading" && (
             <ProfileCardSkeleton />
           )}
+
           {status === "failed" && (
-            <div className="flex gap-x-2 justify-start items-center mt-20 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="shrink-0"
-              >
-                {/* Circle */}
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
-
-                {/* Exclamation line */}
-                <rect x="11" y="6" width="2" height="9" fill="red" />
-
-                {/* Exclamation dot */}
-                <circle cx="12" cy="18" r="1.3" fill="red" />
-              </svg>
-              <p className="text-red-400 font-medium md:text-base text-sm">
-                Failed to get profile data. It might be Internal Server Error!
-              </p>
-            </div>
+            <ErrorMessage message={error || "Internal Server Error or Not found!"}/>
           )}
         </div>
 
@@ -262,28 +252,7 @@ const Home = () => {
             <PortfolioSkeleton />
           )}
           {portfolioStatus === "failed" && (
-            <div className="flex gap-x-2 justify-start items-center mt-5 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="shrink-0"
-              >
-                {/* Circle */}
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
-
-                {/* Exclamation line */}
-                <rect x="11" y="6" width="2" height="9" fill="red" />
-
-                {/* Exclamation dot */}
-                <circle cx="12" cy="18" r="1.3" fill="red" />
-              </svg>
-              <p className="text-red-400 font-medium md:text-base text-sm">
-                Failed to get portfolios data. It might be Internal Server Error!
-              </p>
-            </div>
+            <ErrorMessage message={portfolioErrorMessage || "Internal Server Error or Not found!"} />
           )}
         </div>
         {/* Portfolio end */}
@@ -322,32 +291,13 @@ const Home = () => {
               </div>
             )
           }
+
           {skillStatus === "loading" && (
             <SkillSkeleton />
           )}
+
           {skillStatus === "failed" && (
-            <div className="flex gap-x-2 justify-start items-center mt-20 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="shrink-0"
-              >
-                {/* Circle */}
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
-
-                {/* Exclamation line */}
-                <rect x="11" y="6" width="2" height="9" fill="red" />
-
-                {/* Exclamation dot */}
-                <circle cx="12" cy="18" r="1.3" fill="red" />
-              </svg>
-              <p className="text-red-400 font-medium md:text-base text-sm">
-                Failed to get skills data. It might be Internal Server Error!
-              </p>
-            </div>
+            <ErrorMessage message={skillErrorMessage || "Internal Server Error or Not found!"} />
           )}
         </div>
         {/* Skill end */}
@@ -425,29 +375,9 @@ const Home = () => {
             {resumeStatus === "loading" && (
               <ResumeSkeleton />
             )}
+
             {resumeStatus === "failed" && (
-              <div className="flex gap-x-2 justify-start items-center md:mt-20 mt-25 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="28"
-                  height="28"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="shrink-0"
-                >
-                  {/* Circle */}
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
-
-                  {/* Exclamation line */}
-                  <rect x="11" y="6" width="2" height="9" fill="red" />
-
-                  {/* Exclamation dot */}
-                  <circle cx="12" cy="18" r="1.3" fill="red" />
-                </svg>
-                <p className="text-red-400 font-medium md:text-base text-sm">
-                  Failed to get educations data. It might be Internal Server Error!
-                </p>
-              </div>
+              <ErrorMessage message={resumeErrorMessage || "Internal Server Error or Not found!"} />
             )}
           </motion.div>
           {/* Experiences start */}
@@ -501,28 +431,7 @@ const Home = () => {
             )}
             
             {experienceStatus === "failed" && (
-              <div className="flex gap-x-2 justify-start items-center md:mt-20 mt-25 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="28"
-                  height="28"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="shrink-0"
-                >
-                  {/* Circle */}
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
-
-                  {/* Exclamation line */}
-                  <rect x="11" y="6" width="2" height="9" fill="red" />
-
-                  {/* Exclamation dot */}
-                  <circle cx="12" cy="18" r="1.3" fill="red" />
-                </svg>
-                <p className="text-red-400 font-medium md:text-base text-sm">
-                  Failed to get experiences data. It might be Internal Server Error!
-                </p>
-              </div>
+              <ErrorMessage message={experienceErrorMessage || "Internal Server Error or Not found!"} />
             )}
           </motion.div>
           {/* Experiences end */}
@@ -570,29 +479,9 @@ const Home = () => {
           )}
           
           {blogStatus === "failed" && (
-            <div className="flex gap-x-2 justify-start items-center mt-20 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="shrink-0"
-              >
-                {/* Circle */}
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
-
-                {/* Exclamation line */}
-                <rect x="11" y="6" width="2" height="9" fill="red" />
-
-                {/* Exclamation dot */}
-                <circle cx="12" cy="18" r="1.3" fill="red" />
-              </svg>
-              <p className="text-red-400 font-medium md:text-base text-sm">
-                Failed to get blogs data. It might be Internal Server Error!
-              </p>
-            </div>
+            <ErrorMessage message={blogErrorMessage || "Internal Server Error or Not found!"} />
           )}
+
         </div>
         {/* Blog end */}
 
@@ -663,28 +552,7 @@ const Home = () => {
           )}
 
           {certificateStatus === "failed" && (
-            <div className="flex gap-x-2 justify-start items-center mt-20 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="shrink-0"
-              >
-                {/* Circle */}
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
-
-                {/* Exclamation line */}
-                <rect x="11" y="6" width="2" height="9" fill="red" />
-
-                {/* Exclamation dot */}
-                <circle cx="12" cy="18" r="1.3" fill="red" />
-              </svg>
-              <p className="text-red-400 font-medium md:text-base text-sm">
-                Failed to get certificates data. It might be Internal Server Error!
-              </p>
-            </div>
+            <ErrorMessage message={certificateErrorMessage || "Internal Server Error or Not found!"} />
           )}
         </div>
         {/* Certicate end */}

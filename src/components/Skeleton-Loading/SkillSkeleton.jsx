@@ -21,13 +21,6 @@ const SkillSkeleton = () => {
                       baseColor="#374151"
                     />
                   </span>
-                  <span className="w-6">
-                    <Skeleton 
-                      className="w-full"
-                      height={11}
-                      baseColor="#374151"
-                    />
-                  </span>
                 </div>
 
                 {/* Ruler line */}

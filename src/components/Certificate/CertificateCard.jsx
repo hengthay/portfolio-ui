@@ -1,4 +1,3 @@
-
 const CertificateCard = ({ certificate }) => {
   return (
     <div

@@ -9,6 +9,7 @@ import {
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import PortfolioSkeleton from "../components/Skeleton-Loading/PortfolioSkeleton";
+import ErrorMessage from "../helper/ErrorMessage";
 
 const allInTitle = {
   hidden: { opacity: 0, y: -50 },
@@ -68,8 +69,8 @@ const Project = () => {
           </motion.p>
         </div>
         <motion.div
-          initial={{ opacity: 0, x: 200 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeIn" }}
           className="w-full flex flex-wrap justify-start items-center md:gap-4 gap-2"
         >
@@ -174,28 +175,7 @@ const Project = () => {
 
         {
           filteredPortfolio.length === 0 && (
-            <div className="flex flex-1 gap-x-2 justify-start items-center bg-slate-900 shadow py-2 px-2 rounded-md w-full">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="shrink-0"
-              >
-                {/* Circle */}
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
-
-                {/* Exclamation line */}
-                <rect x="11" y="6" width="2" height="9" fill="red" />
-
-                {/* Exclamation dot */}
-                <circle cx="12" cy="18" r="1.3" fill="red" />
-              </svg>
-              <p className="text-red-400 font-medium md:text-base text-sm">
-                This project is currently unavailable.
-              </p>
-            </div>
+            <ErrorMessage message={"Project is now unavailable!"}/>
           )
         }
 
@@ -204,28 +184,7 @@ const Project = () => {
         )}
 
         {portfolioStatus === "failed" && (
-          <div className="flex gap-x-2 justify-start items-center mt-20 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="28"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="shrink-0"
-            >
-              {/* Circle */}
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
-
-              {/* Exclamation line */}
-              <rect x="11" y="6" width="2" height="9" fill="red" />
-
-              {/* Exclamation dot */}
-              <circle cx="12" cy="18" r="1.3" fill="red" />
-            </svg>
-            <p className="text-red-400 font-medium md:text-base text-sm">
-              Failed to get profile data. It might be Internal Server Error!
-            </p>
-          </div>
+          <ErrorMessage message={portfolioErrorMessage || "Internal Server Error or Not Found!"}/>
         )}
 
       </div>
