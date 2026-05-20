@@ -44,7 +44,7 @@ const Project = () => {
 
   return (
     <div className="md:p-20 p-6 w-full mx-auto flex flex-col max-w-7xl">
-      <div className="w-full flex flex-col md:mt-20 mt-15 md:space-y-10 space-y-5">
+      <div className="w-full flex flex-col md:mt-20 mt-15 md:space-y-10 space-y-5 md:p-0 p-4">
         <div className="md:space-y-12 space-y-8">
           <motion.h2
             variants={allInTitle}
@@ -100,7 +100,7 @@ const Project = () => {
                       transition={{ duration: 0.7, ease: "easeInOut" }}
                       key={port.id}
                       className="group rounded-2xl border border-white/10 bg-slate-900/40 shadow-md overflow-hidden
-                        transition duration-300 hover:-translate-y-2 hover:shadow-2xl"
+                      transition-shadow duration-300 hover:shadow-2xl"
                     >
                       <div className="relative h-48 overflow-hidden">
                         <img
@@ -111,8 +111,8 @@ const Project = () => {
                           className="w-full h-full object-cover transition duration-500 group-hover:scale-110"
                         />
                         <div
-                          className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 
-                            transition flex items-center justify-center gap-4"
+                          className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 
+                          transition flex items-center justify-center gap-4"
                         > 
                           {
                             port?.demo_url && (

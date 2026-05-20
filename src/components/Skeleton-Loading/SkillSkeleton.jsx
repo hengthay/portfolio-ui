@@ -9,9 +9,10 @@ const SkillSkeleton = () => {
           Array(8)
             .fill(0)
             .map((_, index) => (
-              <div className="flex flex-col leading-4">
+              <div 
+                key={index}
+                className="flex flex-col leading-4">
                 <div 
-                  key={index}
                   className="flex justify-between">
                   <span className="w-14">
                     <Skeleton 

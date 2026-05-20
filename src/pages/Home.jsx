@@ -166,9 +166,9 @@ const Home = () => {
         <meta property="og:title" content="LAOV Kim Heng Thay | Portfolio" />
         <meta property="og:description" content="Full-stack developer specializing in React and Laravel." />
       </Helmet>
-      <div className="md:p-20 p-6 w-full mx-auto flex flex-col max-w-7xl max-sm:w-100">
+      <div className="md:p-20 p-6 w-full mx-auto flex flex-col max-w-7xl">
         {/* Introduce */}
-        <div className="w-full">
+        <div className="w-full md:p-0 p-4">
           {profiles.length > 0 &&
             profiles.map((profile) => (
               <ProfileCard profile={profile} key={profile.id} />
@@ -224,7 +224,7 @@ const Home = () => {
         </motion.div>
 
         {/* Portfolio Start */}
-        <div className="w-full flex flex-col md:mt-20 mt-15 space-y-14">
+        <div className="w-full flex flex-col md:mt-20 mt-15 space-y-14 md:p-0 p-4">
           <motion.div
             initial="hidden"
             whileInView="show"
@@ -289,7 +289,7 @@ const Home = () => {
         {/* Portfolio end */}
 
         {/* Skill Start */}
-        <div className="w-full md:mt-20 mt-15 space-y-14">
+        <div className="w-full md:mt-20 mt-15 space-y-14 md:p-0 p-4">
           <motion.div
             initial="hidden"
             whileInView="show"
@@ -353,7 +353,7 @@ const Home = () => {
         {/* Skill end */}
 
         {/* Resume start */}
-        <div className="w-full md:mt-20 mt-15 space-y-14">
+        <div className="w-full md:mt-20 mt-15 space-y-14 md:p-0 p-4">
           <motion.div
             initial="hidden"
             whileInView="show"
@@ -450,88 +450,88 @@ const Home = () => {
               </div>
             )}
           </motion.div>
+          {/* Experiences start */}
+          <motion.div
+            variants={sectionWrap}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.25 }}
+            className="w-full mt-20 relative"
+          >
+            <motion.div
+              variants={headerAnim}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="flex items-center gap-x-4 relative"
+            >
+              
+              <motion.div
+                whileHover={{ scale: 1.06 }}
+                transition={{ type: "spring", stiffness: 260, damping: 16 }}
+                className="relative z-10 p-3 rounded-2xl bg-slate-900 border border-yellow-400/40"
+              >
+                <PiBagLight size={26} className="text-yellow-400" />
+              </motion.div>
+
+              
+              <h4 className="text-lg md:text-2xl font-semibold text-white tracking-wide">
+                Experiences
+              </h4>
+            </motion.div>
+            
+            <motion.span
+              variants={lineAnim}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+              style={{ transformOrigin: "top" }}
+              className={`absolute left-5.5 top-14 w-0.5 bg-gray-400/60 ${experienceStatus === "failed" || experienceStatus === "loading" ? "h-15" : "h-full"}`}
+            ></motion.span>
+
+            {
+              experienceStatus === 'succeeded' && experiences.length > 0 && (
+                <ul className="mt-10 space-y-10 relative">
+                  {experiences.length > 0 &&
+                    experiences.map((experience) => (
+                      <ExperienceCard experience={experience} key={experience.id} />
+                    ))}
+                </ul>
+              )
+            }
+
+            {experienceStatus === "loading" && (
+              <ExperienceSkeleton />
+            )}
+            
+            {experienceStatus === "failed" && (
+              <div className="flex gap-x-2 justify-start items-center md:mt-20 mt-25 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="shrink-0"
+                >
+                  {/* Circle */}
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
+
+                  {/* Exclamation line */}
+                  <rect x="11" y="6" width="2" height="9" fill="red" />
+
+                  {/* Exclamation dot */}
+                  <circle cx="12" cy="18" r="1.3" fill="red" />
+                </svg>
+                <p className="text-red-400 font-medium md:text-base text-sm">
+                  Failed to get experiences data. It might be Internal Server Error!
+                </p>
+              </div>
+            )}
+          </motion.div>
+          {/* Experiences end */}
         </div>
         {/* Resume end */}
 
-        {/* Experiences start */}
-        <motion.div
-          variants={sectionWrap}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.25 }}
-          className="w-full mt-20 relative"
-        >
-          <motion.div
-            variants={headerAnim}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="flex items-center gap-x-4 relative"
-          >
-            
-            <motion.div
-              whileHover={{ scale: 1.06 }}
-              transition={{ type: "spring", stiffness: 260, damping: 16 }}
-              className="relative z-10 p-3 rounded-2xl bg-slate-900 border border-yellow-400/40"
-            >
-              <PiBagLight size={26} className="text-yellow-400" />
-            </motion.div>
-
-            
-            <h4 className="text-lg md:text-2xl font-semibold text-white tracking-wide">
-              Experiences
-            </h4>
-          </motion.div>
-          
-          <motion.span
-            variants={lineAnim}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-            style={{ transformOrigin: "top" }}
-            className={`absolute left-5.5 top-14 w-0.5 bg-gray-400/60 ${experienceStatus === "failed" || experienceStatus === "loading" ? "h-15" : "h-full"}`}
-          ></motion.span>
-
-          {
-            experienceStatus === 'succeeded' && experiences.length > 0 && (
-              <ul className="mt-10 space-y-10 relative">
-                {experiences.length > 0 &&
-                  experiences.map((experience) => (
-                    <ExperienceCard experience={experience} key={experience.id} />
-                  ))}
-              </ul>
-            )
-          }
-
-          {experienceStatus === "loading" && (
-            <ExperienceSkeleton />
-          )}
-          
-          {experienceStatus === "failed" && (
-            <div className="flex gap-x-2 justify-start items-center md:mt-20 mt-25 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="shrink-0"
-              >
-                {/* Circle */}
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
-
-                {/* Exclamation line */}
-                <rect x="11" y="6" width="2" height="9" fill="red" />
-
-                {/* Exclamation dot */}
-                <circle cx="12" cy="18" r="1.3" fill="red" />
-              </svg>
-              <p className="text-red-400 font-medium md:text-base text-sm">
-                Failed to get experiences data. It might be Internal Server Error!
-              </p>
-            </div>
-          )}
-        </motion.div>
-        {/* Experiences end */}
 
         {/* Blog start */}
-        <div className="w-full md:mt-20 mt-15">
+        <div className="w-full md:mt-20 mt-15 md:p-0 p-4">
           <motion.div
             variants={sectionWrap}
             initial="hidden"
@@ -597,7 +597,7 @@ const Home = () => {
         {/* Blog end */}
 
         {/* Certicate Start */}
-        <div className="w-full md:mt-25 mt-20">
+        <div className="w-full md:mt-25 mt-20 md:p-0 p-4">
           <motion.div
             variants={sectionWrap}
             initial="hidden"

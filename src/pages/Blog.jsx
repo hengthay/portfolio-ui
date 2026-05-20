@@ -35,7 +35,7 @@ const Blog = () => {
 
   return (
     <div className="md:p-20 p-6 w-full mx-auto flex flex-col max-w-7xl">
-      <div className="w-full md:mt-20 mt-15">
+      <div className="w-full md:mt-20 mt-15 md:p-0 p-4">
         <div className="md:space-y-12 space-y-8">
           <motion.h2
             variants={allInTitle}
@@ -67,7 +67,7 @@ const Blog = () => {
               className="w-full mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3"
             >
               {blogs.length > 0 &&
-                blogs.map((blog) => (
+                blogs?.map((blog) => (
                   <motion.div
                     variants={reveal}
                     transition={{ duration: 0.7, ease: "easeInOut" }}
@@ -77,16 +77,16 @@ const Blog = () => {
                     <div className="overflow-hidden">
                       <img
                         src={`${import.meta.env.VITE_API_URL}/storage/${
-                          blog.cover_image
+                          blog?.cover_image
                         }`}
-                        alt={blog.title}
+                        alt={blog?.title}
                         className="w-full h-52 object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                     </div>
 
                     <div className="p-6 space-y-4">
                       <div className="flex flex-wrap gap-2">
-                        {blog.tags.map((b, index) => (
+                        {blog.tags?.map((b, index) => (
                           <span
                             key={index}
                             className="text-xs px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
@@ -97,20 +97,20 @@ const Blog = () => {
                       </div>
 
                       <h3 className="text-xl font-semibold tracking-wide text-white group-hover:text-cyan-400 transition">
-                        {blog.title}
+                        {blog?.title}
                       </h3>
 
-                      <p className="text-gray-400 text-sm leading-relaxed line-clamp-3">
-                        {blog.content}
+                      <p className="text-gray-400 text-sm leading-relaxed line-clamp-5">
+                        {blog?.content}
                       </p>
 
                       <div className="flex items-center justify-between pt-4 border-t border-white/10 text-sm text-gray-500">
-                        <span>{formatDate(blog.join_date)}</span>
-                        <a rel="noreferrer" href="https://www.codecademy.com/catalog" target="_blank">
-                          <span className="text-cyan-400 group-hover:underline cursor-pointer">
-                            Read more →
-                          </span>
-                        </a>
+                        <span className="font-medium text-slate-400">Published Log</span>
+                        {
+                          blog?.join_date && (
+                            <span>{formatDate(blog.join_date)}</span>
+                          )
+                        }
                       </div>
                     </div>
                   </motion.div>

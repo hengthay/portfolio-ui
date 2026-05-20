@@ -49,12 +49,12 @@ const Education = () => {
 
   return (
     <div className="md:p-20 p-4 w-full mx-auto flex flex-col max-w-7xl">
-      <div className="w-full md:mt-20 mt-15 md:space-y-14 space-y-7">
+      <div className="w-full md:mt-20 mt-15 md:space-y-14 space-y-7 md:p-0 p-4">
 
         <motion.div
           initial="hidden"
           animate="show"
-          className="md:space-y-12 space-y-8"
+          className="md:space-y-12 space-y-8 md:p-0 p-2"
         >
           <motion.h2
             variants={allInTitle}
@@ -141,74 +141,74 @@ const Education = () => {
 
         </motion.div>
 
+        <motion.div
+          variants={fadeIn}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="w-full mt-20 relative"
+        >
+          <div className="flex items-center md:gap-x-4 gap-x-2 relative">
+            {/* Icon */}
+            <div className="relative z-10 p-3 rounded-2xl bg-slate-900 border border-yellow-400/40">
+              <PiBagLight size={26} className="text-yellow-400" />
+            </div>
+
+            {/* Title */}
+            <h4 className="text-lg md:text-2xl font-semibold text-white tracking-wide">
+              Experiences
+            </h4>
+          </div>
+
+          {/* Vertical Line from Icon */}
+          <span
+            className={`absolute left-5.5 top-14 w-0.5 bg-gray-400/60 ${experienceStatus === "failed" || experienceStatus === "loading" ? "h-15" : "h-full"}`}
+          ></span>
+          
+          {
+            experienceStatus === 'succeeded' && experiences.length > 0 && (
+              <ul className="mt-10 space-y-10 relative">
+                {experiences.length > 0 &&
+                  experiences.map((experience) => (
+                    <ExperienceCard experience={experience} key={experience.id} />
+                  ))}
+              </ul>
+            )
+          }
+
+          {experienceStatus === "loading" && (
+            <ExperienceSkeleton />
+          )}
+
+          {experienceStatus === "failed" && (
+            <div className="flex gap-x-2 justify-start items-center mt-20 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="shrink-0"
+              >
+                {/* Circle */}
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
+
+                {/* Exclamation line */}
+                <rect x="11" y="6" width="2" height="9" fill="red" />
+
+                {/* Exclamation dot */}
+                <circle cx="12" cy="18" r="1.3" fill="red" />
+              </svg>
+              <p className="text-red-400 font-medium md:text-base text-sm">
+                Failed to get profile data. It might be Internal Server Error!
+              </p>
+            </div>
+          )}
+
+        </motion.div>
       </div>
 
-      <motion.div
-        variants={fadeIn}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.25 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="w-full mt-20 relative"
-      >
-        <div className="flex items-center md:gap-x-4 gap-x-2 relative">
-          {/* Icon */}
-          <div className="relative z-10 p-3 rounded-2xl bg-slate-900 border border-yellow-400/40">
-            <PiBagLight size={26} className="text-yellow-400" />
-          </div>
-
-          {/* Title */}
-          <h4 className="text-lg md:text-2xl font-semibold text-white tracking-wide">
-            Experiences
-          </h4>
-        </div>
-
-        {/* Vertical Line from Icon */}
-        <span
-          className={`absolute left-5.5 top-14 w-0.5 bg-gray-400/60 ${experienceStatus === "failed" || experienceStatus === "loading" ? "h-15" : "h-full"}`}
-        ></span>
-        
-        {
-          experienceStatus === 'succeeded' && experiences.length > 0 && (
-            <ul className="mt-10 space-y-10 relative">
-              {experiences.length > 0 &&
-                experiences.map((experience) => (
-                  <ExperienceCard experience={experience} key={experience.id} />
-                ))}
-            </ul>
-          )
-        }
-
-        {experienceStatus === "loading" && (
-          <ExperienceSkeleton />
-        )}
-
-        {experienceStatus === "failed" && (
-          <div className="flex gap-x-2 justify-start items-center mt-20 bg-slate-900 shadow py-2 px-2 rounded-md w-full">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="28"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="shrink-0"
-            >
-              {/* Circle */}
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
-
-              {/* Exclamation line */}
-              <rect x="11" y="6" width="2" height="9" fill="red" />
-
-              {/* Exclamation dot */}
-              <circle cx="12" cy="18" r="1.3" fill="red" />
-            </svg>
-            <p className="text-red-400 font-medium md:text-base text-sm">
-              Failed to get profile data. It might be Internal Server Error!
-            </p>
-          </div>
-        )}
-
-      </motion.div>
     </div>
   );
 };

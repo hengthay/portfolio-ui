@@ -25,7 +25,7 @@ const PortfolioCard = ({ port }) => {
           className="w-full h-full object-cover transition duration-500 group-hover:scale-110"
         />
         <div
-          className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-4"
+          className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition flex items-center justify-center gap-4"
         >
           {
             port?.demo_url && (

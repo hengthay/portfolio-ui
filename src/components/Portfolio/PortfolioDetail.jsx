@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { IoIosArrowRoundBack } from "react-icons/io";
 import formatDate from '../../helper/formatDate';
+import { FiExternalLink, FiGithub } from 'react-icons/fi';
 
 const PortfolioDetail = () => {
 
@@ -28,12 +29,12 @@ const PortfolioDetail = () => {
 
   return (
     <div className="md:p-10 lg:p-20 p-4 w-full mx-auto flex flex-col max-w-7xl overflow-x-hidden">
-      <div className="w-full flex flex-col mt-10 md:mt-15 space-y-8 md:space-y-14">
+      <div className="w-full flex flex-col mt-10 md:mt-15 space-y-8 md:space-y-14 md:p-0 p-4">
         <div className='flex flex-wrap justify-between items-center gap-4'>
           <Link to={'/portfolio'} className='flex items-center gap-x-2'>
             <IoIosArrowRoundBack size={20}/>
             <span className='text-sm'>
-              Back to portfolios
+              Back
             </span>
           </Link>
           <span className='text-xs px-3 py-1 rounded-full font-semibold bg-white/10 border border-cyan-400/50 text-gray-200'>
@@ -44,7 +45,7 @@ const PortfolioDetail = () => {
         <p className="max-w-2xl text-base text-gray-400 tracking-wide leading-relaxed">This project overview outlines the goals, features, technologies, and challenges involved in building the application, highlighting key decisions and the value it delivers.</p>
 
         <div className='grid grid-cols-12 gap-6 lg:gap-10 items-start'>
-          <div className='lg:col-span-6 col-span-12 bg-black/30 rounded-2xl'>
+          <div className='lg:col-span-6 col-span-12 bg-black/30 rounded-2xl shadow-sm p-2'>
             <div className='w-full md:h-100 h-auto'>
               {
                 imageSrc ? (
@@ -179,14 +180,46 @@ const PortfolioDetail = () => {
                 <span className="text-gray-400">Tech count</span>
                 <span className="text-gray-200">{portfolioDetail?.technologies?.length ?? 0}</span>
               </div>
-              <div className="pt-4 border-t border-white/10 space-y-2">
-                <p className="text-xs text-gray-500 uppercase">External Links</p>
-                <a href={portfolioDetail?.demo_url} target='_blank' className="block text-xs md:text-sm truncate text-cyan-400 hover:underline">
-                  {portfolioDetail?.demo_url || "No demo URL"}
-                </a>
-                <a href={portfolioDetail?.github_url} target='_blank' className="block text-xs md:text-sm truncate text-cyan-400 hover:underline">
-                  {portfolioDetail?.github_url || "No github URL"}
-                </a>
+              <div className="pt-5 border-t border-white/10 space-y-3">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                  Project Links
+                </p>
+
+                <div className="flex flex-col gap-3">
+                  {portfolioDetail?.demo_url ? (
+                    <a
+                      href={portfolioDetail.demo_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2.5 w-full py-2.5 px-4 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-medium text-sm hover:bg-cyan-500/20 transition duration-200"
+                    >
+                      <FiExternalLink size={16} />
+                      <span>Launch Live Demo</span>
+                    </a>
+                  ) : (
+                    <div className="flex items-center gap-2.5 w-full py-2.5 px-4 rounded-xl bg-slate-800/40 border border-white/5 text-slate-500 text-sm select-none">
+                      <FiExternalLink size={16} className="opacity-50" />
+                      <span>No Demo Available</span>
+                    </div>
+                  )}
+
+                  {portfolioDetail?.github_url ? (
+                    <a
+                      href={portfolioDetail.github_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2.5 w-full py-2.5 px-4 rounded-xl bg-slate-800 border border-white/10 text-slate-200 font-medium text-sm hover:bg-slate-700 hover:text-white transition duration-200"
+                    >
+                      <FiGithub size={16} />
+                      <span>Lanuch Github Demo</span>
+                    </a>
+                  ) : (
+                    <div className="flex items-center gap-2.5 w-full py-2.5 px-4 rounded-xl bg-slate-800/40 border border-white/5 text-slate-500 text-sm select-none">
+                      <FiGithub size={16} className="opacity-50" />
+                      <span>No Github Available</span>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>

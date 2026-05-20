@@ -50,9 +50,13 @@ const Header = ({ isOpen, handleOpenMenu}) => {
         </ul>
 
         {/* Mobile mode */}
-        <div className='md:hidden flex justify-end sm:mx-auto max-sm:mx-16'>
-          <button onClick={handleOpenMenu} className='cursor-pointer'>
-            <RiArrowDropDownLine size={28} className='text-white'/>
+        <div className="md:hidden absolute right-18 top-0 bg-slate-800/80 backdrop-blur-md border border-white/10 rounded-xl p-1 shadow-lg">
+          <button 
+            onClick={handleOpenMenu} 
+            className="cursor-pointer flex items-center justify-center"
+            aria-label="Toggle Menu"
+          >
+            <RiArrowDropDownLine size={32} className="text-white hover:text-cyan-400 transition-colors" />
           </button>
         </div>
 

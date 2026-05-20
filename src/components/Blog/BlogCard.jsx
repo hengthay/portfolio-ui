@@ -15,7 +15,6 @@ const BlogCard = ({ blog }) => {
         WebkitBackfaceVisibility: "hidden",
       }}
       className="group rounded-2xl overflow-hidden bg-[#0f172a] border border-white/10 hover:border-cyan-500/50 transition-colors duration-300"
-      key={blog.id}
     >
       <div className="overflow-hidden">
         <img
@@ -27,7 +26,7 @@ const BlogCard = ({ blog }) => {
 
       <div className="p-6 space-y-4">
         <div className="flex flex-wrap gap-2">
-          {blog.tags.map((b, index) => (
+          {blog.tags?.map((b, index) => (
             <span
               key={index}
               className="text-xs px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
@@ -41,17 +40,17 @@ const BlogCard = ({ blog }) => {
           {blog.title}
         </h3>
 
-        <p className="text-gray-400 text-sm leading-relaxed line-clamp-3">
+        <p className="text-gray-400 text-sm leading-relaxed line-clamp-5">
           {blog.content}
         </p>
 
         <div className="flex items-center justify-between pt-4 border-t border-white/10 text-sm text-gray-500">
-          <span>{formatDate(blog.join_date)}</span>
-          <a rel="noreferrer" href="https://www.codecademy.com/catalog" target="_blank">
-            <span className="text-cyan-400 group-hover:underline cursor-pointer">
-              Read more →
-            </span>
-          </a>
+          <span className="font-medium text-slate-400">Published Log</span>
+          {
+            blog?.join_date && (
+              <span>{formatDate(blog.join_date)}</span>
+            )
+          }
         </div>
       </div>
     </motion.div>
