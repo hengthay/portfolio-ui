@@ -29,18 +29,29 @@ const Contact = () => {
     try {
       const token = import.meta.env.VITE_TELEGRAM_TOKEN;
       const chatId = import.meta.env.VITE_TELEGRAM_CHATID;
-      const text = `📩 *New Contact Message*%0A👤 Name: ${form.name}%0A📧 Email: ${form.email}%0A📝 Message: ${form.message}`;
+      const text =
+      `📩 *New Contact Message*\n` +
+      `👤 *Name:* ${form.name}\n` +
+      `📧 *Email:* ${form.email}\n` +
+      `📝 *Message:*${form.message}`;
 
       await axios
         .post(
-          `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${text}&parse_mode=Markdown`
+          `https://api.telegram.org/bot${token}/sendMessage`,
+          {
+            chat_id: chatId,
+            text,
+            parse_mode: "Markdown",
+          }
         )
         .then((res) => {
           if (res.status === 200) {
             Swal.fire({
               title: "Successfully!",
+              text: "Message has been sent!",
               icon: "success",
               draggable: true,
+              timer: 1500
             });
           }
         })
@@ -50,6 +61,7 @@ const Contact = () => {
             title: "⚠️ Error sending message!",
             icon: "error",
             draggable: true,
+            timer: 1500
           });
         });
     } catch (error) {
